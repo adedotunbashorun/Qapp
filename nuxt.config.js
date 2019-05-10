@@ -35,6 +35,11 @@ export default {
   plugins: [
   ],
 
+  //Active class
+  router: {
+    linkActiveClass: 'active'
+  },
+
   /*
   ** Nuxt.js modules
   */

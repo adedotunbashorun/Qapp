@@ -13,29 +13,37 @@
     </div>
 </template>
 <script>
-import Header from '~/components/Header.vue'
-import SideBar from '~/components/SideBar.vue'
-import Footer from '~/components/Footer.vue'
+import Header from '~/components/Layout/Admin/Header.vue'
+import SideBar from '~/components/Layout/Admin/SideBar.vue'
+import Footer from '~/components/Layout/Admin/Footer.vue'
 
 export default {
     head () {
         return {
             bodyAttrs: {
-                id: 'page-top'
+                class: 'h-100'
             },
             link: [
-                { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity: "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T",crossorigin:'anonymous' },
-                { rel: 'stylesheet', href: 'https://unpkg.com/aos@2.3.0/dist/aos.css' },
-                { rel: 'stylesheet',href: '/css/main.css', type:"text/css"}
+                { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.6/css/all.css',crossorigin:'anonymous' },
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' },
+                { rel: 'stylesheet',href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'},
+                { rel: 'stylesheet', href: '/styles/shards-dashboards.1.1.0.min.css', 'id':"main-stylesheet", 'data-version':"1.1.0" },
+                { rel: 'stylesheet', href: '/styles/extras.1.1.0.min.css' },
+                { rel: 'stylesheet',href: 'https://buttons.github.io/buttons.js'},
+                { rel: 'stylesheet',href: 'https://fonts.googleapis.com/css?family=Overpass|Raleway'},
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' },
+                { rel: 'stylesheet',href: '/styled.css'}
             ],
             script: [        
-                { src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js',integrity:"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", crossorigin:"anonymous" },
-                { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',integrity:"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1", crossorigin:"anonymous" },
-                { src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js', integrity:"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM", crossorigin:"anonymous"},
-                { src: 'https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js' },
-                { src: 'https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js' },
-                { src: 'https://unpkg.com/aos@2.3.0/dist/aos.js' },
-                { src: '/js/text-to-speech.js' }
+                { src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js' },
+                { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' },
+                { src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'},
+                { src: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js' },
+                { src: 'https://unpkg.com/shards-ui@latest/dist/js/shards.min.js' },
+                { src: 'https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js' },
+                { src: '/scripts/extras.1.1.0.min.js' },
+                { src: '/scripts/shards-dashboards.1.1.0.min.js' },
+                { src: '/scripts/app/app-blog-overview.1.1.0.js' }
             ]
         }
     },

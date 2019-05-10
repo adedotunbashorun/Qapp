@@ -1,21 +1,23 @@
 import Vuex from 'vuex'
 
-import { productGetters, manufacturerGetters } from './getters'
-import { productMutations, cartMutations, manufacturerMutations } from './mutations'
-import { productActions, manufacturerActions } from './actions'
+import { userGetters } from './getters'
+import { userMutations } from './mutations'
+import { userActions } from './actions'
 
-Vue.use(Vuex)
 
-export default new Vuex.Store({
-  strict: true,
-  state: {
-    cart: [],
-    showLoader: false,
-    product: {},
-    products: [],
-    manufacturers: []
-  },
-  mutations: Object.assign({}, productMutations, cartMutations, manufacturerMutations),
-  getters: Object.assign({}, productGetters, manufacturerGetters),
-  actions: Object.assign({}, productActions, manufacturerActions)
-})
+const store = () => {
+  return new Vuex.Store({
+    strict: true,
+    state: {
+      users: [],
+      user:{},
+      token: '',
+      showLoader: false,
+    },
+    mutations: Object.assign({}, userMutations),
+    getters: Object.assign({}, userGetters),
+    actions: Object.assign({}, userActions)
+  })
+}
+
+export default store

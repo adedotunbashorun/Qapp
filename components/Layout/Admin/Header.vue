@@ -14,7 +14,7 @@
             <ul class="navbar-nav border-left flex-row ">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <img class="user-avatar rounded-circle mr-2" src="images/avatars/L.jpg" alt="User Avatar">
+                <img class="user-avatar rounded-circle mr-2" src="/images/avatars/L.jpg" alt="User Avatar">
                 <span class="d-none d-md-inline-block">Ludcra Consulting</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
@@ -36,6 +36,6 @@
 </template>
 <script>
 export default {
-  
+  props: ['user']
 }
 </script>
