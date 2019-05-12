@@ -73,7 +73,7 @@
             </a>
             </li> -->
             <li class="nav-item">
-            <a class="nav-link " @click="logoutUser">
+            <a class="nav-link">
                 <i class="material-icons">logout</i>
                 <span><strong>Logout</strong></span>
             </a>
