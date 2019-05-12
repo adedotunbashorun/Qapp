@@ -10,6 +10,7 @@ export default {
         Dashboard
     },
     mounted(){
+        console.log(this.$store.state.auth)
     },
     computed:{
         user(){            

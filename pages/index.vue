@@ -39,6 +39,8 @@
 </template>
 
 <script>
+
+const Cookie = process.client ? require('js-cookie') : undefined
 export default {  
   middleware: 'guest',
   layout: 'site',
@@ -59,6 +61,11 @@ export default {
           let component = this;
           this.$store.dispatch('login', component.user)
           .then((resp) => {
+              const token = resp.data.token
+              const user = resp.data.user
+              this.$store.commit('LOGIN_SUCCESS', {token, user})              
+              Cookie.set('jwtToken', token)
+              Cookie.set('user', user)
               this.$router.go('/admin/dashboard') 
           })
           .catch(err =>  {

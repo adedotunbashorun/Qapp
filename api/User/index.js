@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {config} from '../../config'
-const Cookie = process.client ? require('js-cookie') : undefined
 
 
 const login = (data) => {
@@ -9,8 +8,6 @@ const login = (data) => {
             .then(resp => {
                 const token = resp.data.token
                 const user = resp.data.user
-                Cookie.set('jwtToken', token)
-                Cookie.set('user', user)
                 // axios.defaults.headers.common['Authorization'] = resp.data.token
                 resolve(resp)
             })
@@ -95,8 +92,6 @@ const activity = (data,header) => {
 const logout = (header)  => {
     return new Promise((resolve, reject) => {
         axios.get(config.apiUrl + '/api/logout', { headers: { Authorization: header } }).then(resp => {
-            Cookie.remove('jwtToken')
-            Cookie.remove('user')
             // delete axios.defaults.headers.common['Authorization']
             resolve(resp)
         }).catch(err => {

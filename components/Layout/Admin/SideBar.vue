@@ -92,12 +92,12 @@ export default {
           .then(() => {
             Cookie.remove('jwtToken')
             Cookie.remove('user')
+            const token = null
+            const user = null
+            this.$store.commit('LOGIN_SUCCESS', {token, user})
             this.$router.go('/')
           })
           .catch(err => {
-              Cookie.remove('jwtToken')
-              Cookie.remove('user')
-              this.$router.go('/')
           })
       },
     }

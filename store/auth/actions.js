@@ -17,7 +17,7 @@ import {
   ALL_USERS,
   ALL_USERS_SUCCESS,
   ALL_USERS_FAILURE,
-  LOGIN,
+  LOGIN, 
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
@@ -56,7 +56,6 @@ export const actions = {
     commit(LOGIN)
     return new Promise((resolve, reject) => {
       Api.User.login(payload).then(response => {
-        commit(LOGIN_SUCCESS, response.data)
         resolve(response)
       }).catch(err => {
         commit(LOGIN_FAILURE, err)
@@ -131,13 +130,12 @@ export const actions = {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {
         token = parsed.jwtToken
-        user = JSON.parse(parsed.user)
-        // commit(LOGIN_SUCCESS, { token, user })
+        user = JSON.parse(parsed.user)        
       } catch (err) {
         // No valid cookie found
       }
     }
-    
+    commit(LOGIN_SUCCESS, { token, user })
   }
 }
 
