@@ -66,7 +66,7 @@ export default {
               this.$store.commit('LOGIN_SUCCESS', {token, user})              
               Cookie.set('jwtToken', token)
               Cookie.set('user', user)
-              this.$router.push('/admin/dashboard') 
+              this.$router.go('/admin/dashboard') 
           })
           .catch(err =>  {
             component.errors.push(err)

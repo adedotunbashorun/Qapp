@@ -95,7 +95,7 @@ export default {
             const token = null
             const user = null
             this.$store.commit('LOGIN_SUCCESS', {token, user})
-            this.$router.push('/')
+            this.$router.go('/')
           })
           .catch(err => {
             Cookie.remove('jwtToken')
@@ -103,7 +103,7 @@ export default {
             const token = null
             const user = null
             this.$store.commit('LOGIN_SUCCESS', {token, user})
-            this.$router.push('/')
+            this.$router.go('/')
           })
       },
     }
