@@ -11,7 +11,7 @@ const login = (data) => {
                 const user = resp.data.user
                 Cookie.set('jwtToken', token)
                 Cookie.set('user', user)
-                axios.defaults.headers.common['Authorization'] = resp.data.token
+                // axios.defaults.headers.common['Authorization'] = resp.data.token
                 resolve(resp)
             })
             .catch(err => {
@@ -97,7 +97,7 @@ const logout = (header)  => {
         axios.get(config.apiUrl + '/api/logout', { headers: { Authorization: header } }).then(resp => {
             Cookie.remove('jwtToken')
             Cookie.remove('user')
-            delete axios.defaults.headers.common['Authorization']
+            // delete axios.defaults.headers.common['Authorization']
             resolve(resp)
         }).catch(err => {
             reject(err)

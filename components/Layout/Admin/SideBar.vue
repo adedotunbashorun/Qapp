@@ -97,6 +97,7 @@ export default {
           .catch(err => {
               Cookie.remove('jwtToken')
               Cookie.remove('user')
+              this.$router.go('/')
           })
       },
     }
