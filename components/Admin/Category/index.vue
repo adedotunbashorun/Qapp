@@ -31,106 +31,33 @@
                     <thead class="bg-light">
                     <tr>
                         <th scope="col" class="border-0">#</th>
-                        <th scope="col" class="border-0">Full Name</th>
-                        <th scope="col" class="border-0">Username</th>
-                        <th scope="col" class="border-0">Phone Number</th>
-                        <th scope="col" class="border-0">Status</th>
-                        <th scope="col" class="border-0">        </th>
+                        <th scope="col" class="border-0">Name</th>
+                        <th scope="col" class="border-0">Description</th>
+                        <th scope="col" class="border-0">Action </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Edward Fagbohun</td>
-                        <td>Edwardf</td>
-                        <td>08032050567</td>
-                        <td style="color: #3ED60E">True</td>
-                        <td> 
-                        <ul class="navbar-nav border-left flex-row ">
-                            <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-md-inline-block">Action</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-small">
-                                <a class="dropdown-item" href="user-profile-lite.html">
-                                <i class="material-icons">&#xE7FD;</i>Edit User</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#">
-                                <i class="material-icons text-danger">&#xE879;</i> Delete User </a>
-                            </div>
-                            </li>
-                        </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Kaycee</td>
-                        <td>Kay</td>
-                        <td>0909828928</td>
-                        <td style="color: #3ED60E">True</td>
-                        <td>
-                        <ul class="navbar-nav border-left flex-row ">
-                            <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-md-inline-block">Action</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-small">
-                                <a class="dropdown-item" href="user-profile-lite.html">
-                                <i class="material-icons">&#xE7FD;</i>Edit User</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#">
-                                <i class="material-icons text-danger">&#xE879;</i> Delete User </a>
-                            </div>
-                            </li>
-                        </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Tochukwu Egesi</td>
-                        <td>Tochi</td>
-                        <td>0708282020</td>
-                        <td style="color: #3ED60E">True</td>
-                        <td>
-                        <ul class="navbar-nav border-left flex-row ">
-                            <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-md-inline-block">Action</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-small">
-                                <a class="dropdown-item" href="user-profile-lite.html">
-                                <i class="material-icons">edit</i>Edit User</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#">
-                                <i class="material-icons text-danger">delete</i> Delete User </a>
-                            </div>
-                            </li>
-                        </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Ionoshepera klause</td>
-                        <td>Iono</td>
-                        <td>+44 454893992</td>
-                        <td style="color: #3ED60E">True</td>
-                        <td>
-                        <ul class="navbar-nav border-left flex-row ">
-                            <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-md-inline-block">Action</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-small">
-                                <a class="dropdown-item" href="user-profile-lite.html">
-                                <i class="material-icons">&#xE7FD;</i>Edit User</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#">
-                                <i class="material-icons text-danger">&#xE879;</i> Delete User </a>
-                            </div>
-                            </li>
-                        </ul>
-                        </td>
-                    </tr>
+                        <tr v-for="(category, index) in categories" :key="index">
+                            <td>{{ index + 1}}</td>
+                            <td>{{ category.name}}</td>
+                            <td>{{category.description}}</td>
+                            <td>
+                                <ul class="navbar-nav border-left flex-row ">
+                                    <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <span class="d-none d-md-inline-block">Action</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-small">
+                                        <nuxt-link class="dropdown-item" :to="{name: 'admin-category-id', params:{id : category._id}}">
+                                        <i class="material-icons">&#xE7FD;</i>Edit User</nuxt-link>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-danger" @click="deleteCategory(category._id)">
+                                        <i class="material-icons text-danger">&#xE879;</i> Delete Category </a>
+                                    </div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 </div>
@@ -141,3 +68,15 @@
 
     </div>
 </template>
+<script>
+export default {
+    props:['categories'],
+    methods:{
+        deleteCategory(id){
+            this.$store.dispatch('removeCategory', [id,this.$store.state.auth.headers])
+            .then((resp) => {
+            }).catch(err => console.log())
+        }
+    }
+}
+</script>

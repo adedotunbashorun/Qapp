@@ -3,7 +3,7 @@
         <div class="row">
             <SideBar/>
             <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-                <Header/>
+                <Header :user="user"/>
                 <div class="main-content-container container-fluid px-4">
                     <nuxt />
                 </div>                
@@ -47,8 +47,18 @@ export default {
             ]
         }
     },
+    data(){
+        return {
+            // user: {}
+        }
+    },
     components: {
         Header,Footer,SideBar
+    },    
+    computed:{
+        user(){
+            return this.$store.getters.authUser
+        }
     }
 }
 </script>

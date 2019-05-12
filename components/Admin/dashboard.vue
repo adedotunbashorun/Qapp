@@ -4,7 +4,7 @@
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
             <span class="text-uppercase page-subtitle">Dashboard</span>
-            <h3 class="page-title">Welcome</h3>
+            <h3 class="page-title">Welcome {{ user.first_name + ' ' + user.last_name}}</h3>
             </div>
         </div>
         <!-- End Page Header -->
@@ -136,3 +136,8 @@
         </div>
     </div>
 </template>
+<script>
+export default {    
+  props: ['user'],
+}
+</script>

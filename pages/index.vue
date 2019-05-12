@@ -39,7 +39,8 @@
 </template>
 
 <script>
-export default {
+export default {  
+  middleware: 'guest',
   layout: 'site',
   data(){
       return {
@@ -53,12 +54,16 @@ export default {
         }
       }
   },
-  methods: {
+  methods: {      
       loginUser(){
           let component = this;
           this.$store.dispatch('login', component.user)
-          .then(() => this.$router.push('/admin/dashboard'))
-          .catch(err => console.log(err))
+          .then((resp) => {
+            (this.$store.state.auth.error != '') ? 
+              component.errors.push(this.$store.state.auth.error) :
+                                                this.$router.push('/admin/dashboard') 
+          })
+          .catch(err =>  console.log())
       },
       checkForm: function (e) {
         if (this.user.email && this.user.password) {

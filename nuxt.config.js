@@ -14,7 +14,11 @@ export default {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: '/styles/toastr/toastr.min.css'}
+    ],
+    script: [
+      { src: '/scripts/toastr/toastr.min.js' },
     ]
   },
 
@@ -32,12 +36,12 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [],
 
   //Active class
   router: {
-    linkActiveClass: 'active'
+    linkActiveClass: 'active',
+    middleware: 'auth'
   },
 
   /*
@@ -50,10 +54,7 @@ export default {
   ],
   /*
   ** Axios module configuration
-  */
-  axios: {
-    // See https://github.com/nuxt-community/axios-module#options
-  },
+  */  
 
   /*
   ** Build configuration

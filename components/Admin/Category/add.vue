@@ -22,34 +22,26 @@
         <div class="row">
             <div class="col">
                 <strong class="text-muted d-block mb-2"></strong>
-                <form>
+                <form @submit.prevent="checkForm">
                     <div class="form-group" style="max-width: 30%">
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
                         </div>
-                        <input type="text" class="form-control" placeholder="Full Name" aria-label="Full name" aria-describedby="basic-addon1"> </div>
-                    </div>
-
-                    <div class="form-group" style="max-width: 30%">
-                        <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                        </div>
-                        <input type="text" class="form-control" placeholder="Phone number" aria-label="Full name" aria-describedby="basic-addon1"> </div>
+                        <input type="text" class="form-control" v-model="category.name" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1"> </div>
                     </div>
 
                     <div class="form-group" style="max-width: 30%">
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
                         </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"> </div>
+                        <textarea type="text" class="form-control" v-model="category.description" rows="4" aria-describedby="basic-addon1"> 
+                        </textarea>
+                        </div>
                     </div>
-
-                    <div class="form-group" style="max-width: 30%">
-                        <input type="text" class="form-control" id="inputAddress" placeholder="Email" value=""> 
-                    </div>
-
-                    <div class="form-group" style="max-width: 30%">
-                        <input type="password" class="form-control" id="inputPassword4" placeholder="Password" value="">
+                    <div class="row">
+                        <div class="col">
+                        <button type="submit" class="mb-2 btn btn-primary mr-2">Add category</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -57,12 +49,47 @@
         <!-- End Form -->
 
         <!-- Button -->
-        <div class="row">
-            <div class="col">
-            <button type="button" class="mb-2 btn btn-primary mr-2">Add category</button>
-            </div>
-        </div>
+        
         <!-- / Button --> 
     </div>
 
 </template>
+<script>
+export default {
+    data(){
+        return {
+            errors: [],
+            category: {
+                name:'',
+                description:''
+            }
+        }
+    },
+    methods: {
+        register(){
+            let component = this;
+            this.$store.dispatch('addCategory', [component.category,this.$store.state.auth.headers])
+            .then((resp) => {component.$router.push('/admin/category')})
+            .catch(err => console.log(err))
+        },
+        checkForm: function (e) {
+            if (this.category.name && this.category.description) {
+            this.register();
+            return true;
+            }
+
+            this.errors = [];
+            if (!this.category.name) {
+            this.errors.push('Name required.');
+            return false;
+            }
+            if (!this.category.description) {
+            this.errors.push('Description required.');
+            return false;
+            }
+            e.preventDefault();
+        }
+    }
+}
+</script>
+

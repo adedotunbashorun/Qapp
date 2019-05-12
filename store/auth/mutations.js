@@ -8,35 +8,59 @@ import {
   UPDATE_USER_SUCCESS,
   REMOVE_USER,
   REMOVE_USER_SUCCESS,
+  REMOVE_USER_FAILURE,
   ALL_USERS,
   ALL_USERS_SUCCESS,
   LOGIN,
   LOGIN_SUCCESS,
-  ERROR_MSG
+  LOGIN_FAILURE,
+  ERROR_MSG,
+  USER_BY_ID_FAILURE,
+  ALL_USERS_FAILURE,
+  ACTIVITY,
+  ACTIVITY_SUCCESS
 } from './mutation-types'
 
-export const userMutations = {
+export const mutations = {
   [ALL_USERS] (state) {
     state.showLoader = true
   },
   [ALL_USERS_SUCCESS] (state, payload) {
     state.showLoader = false
-    state.users = payload
+    state.users = payload.users
+  },
+  [ALL_USERS_FAILURE](state, payload) {
+    state.showLoader = false
+    state.error = payload
+    state.users = []
   },
   [LOGIN](state) {
     state.showLoader = true
   },
   [LOGIN_SUCCESS](state, payload) {
     state.showLoader = false
-    state.user = payload
+    state.user = payload.user
+    state.headers =  payload.token
+    state.error = ''
     state.token = payload.token
+  },
+  [LOGIN_FAILURE](state, payload) {
+    state.showLoader = false
+    state.error = payload
+    state.token = ''
+    state.user = ''
   },
   [USER_BY_ID] (state) {
     state.showLoader = true
   },
   [USER_BY_ID_SUCCESS] (state, payload) {
     state.showLoader = false
-    state.user = payload
+  },
+  [USER_BY_ID_FAILURE](state, payload) {
+    state.showLoader = false
+    state.error = payload
+    state.token = ''
+    state.user = ''
   },
   [ADD_USER]: (state, payload) => {
     state.showLoader = true
@@ -50,17 +74,23 @@ export const userMutations = {
   },
   [UPDATE_USER_SUCCESS]: (state, payload) => {
     state.showLoader = false
-    state.users = state.users.map(p => {
-      if (p._id === payload._id) {
-        return payload
-      }
-      return p
-    })
   },
   [REMOVE_USER]: (state, payload) => {
     state.showLoader = true
   },
   [REMOVE_USER_SUCCESS]: (state, payload) => {
+    state.showLoader = false
+    const index = state.users.findIndex(user => user._id === payload)
+    console.debug('index', index)
+    state.users.splice(index, 1)
+  },
+  [REMOVE_USER_FAILURE]: (state, payload) => {
+    state.showLoader = false
+  },
+  [ACTIVITY](state) {
+    state.showLoader = true
+  },
+  [ACTIVITY_SUCCESS](state, payload) {
     state.showLoader = false
   },
   [ERROR_MSG] (state, payload) {}

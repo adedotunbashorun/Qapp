@@ -24,3 +24,6 @@ export const REMOVE_USER_FAILURE = 'REMOVE_USER_FAILURE'
 
 export const ERROR_MSG = 'ERROR_MSG'
 export const SUCCESS_MSG = 'SUCCESS_MSG'
+
+export const ACTIVITY = 'ACTIVITY'
+export const ACTIVITY_SUCCESS = 'ACTIVITY_SUCCESS'

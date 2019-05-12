@@ -73,12 +73,26 @@
             </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link " href="https://monitorbywchub.freshdesk.com/">
-                <i class="material-icons">phone</i>
-                <span><strong>Contact us</strong></span>
+            <a class="nav-link " @click="logoutUser()">
+                <i class="material-icons">logout</i>
+                <span><strong>Logout</strong></span>
             </a>
             </li>
         </ul>
         </div>
     </aside>
 </template>
+<script>
+export default {
+    methods:{
+        logoutUser() {
+          let component = this;
+          this.$store.dispatch('logout',this.$store.state.auth.headers)
+          .then(() => {
+            component.$router.push('/') 
+          })
+          .catch(err =>  console.log())
+      },
+    }
+}
+</script>

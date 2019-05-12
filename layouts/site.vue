@@ -17,7 +17,7 @@ export default {
                 { rel: 'https://use.fontawesome.com/releases/v5.8.2/css/all.css'}
             ],
             script: [        
-                { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js' }
+                { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js' },
                 
             ]
         }

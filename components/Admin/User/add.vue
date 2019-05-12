@@ -46,6 +46,17 @@
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
                         </div>
+                        <select class="form-control" v-model="user.medium">
+                            <option value="">-- Information Medium --</option>
+                            <option value="Email">Email</option>
+                            <option value="Sms">Sms</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="max-width: 30%">
+                        <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
                         <input type="text" class="form-control" v-model="user.first_name" placeholder="First Name" aria-label="Full name" aria-describedby="basic-addon1"> </div>
                     </div>
 
@@ -64,7 +75,7 @@
                     </div>
 
                     <div class="form-group" style="max-width: 30%">
-                        <input type="password" class="form-control" id="inputPassword4" placeholder="Password" value="">
+                        <input type="password" class="form-control" v-model="user.password" id="inputPassword4" placeholder="Password" value="">
                     </div>                
                 </div>
             </div>
@@ -84,66 +95,67 @@
 <script>
 export default {
     data(){
-      return {
-        errors: [],
-        user: {
-            title:'',
-            first_name:'',
-            last_name:'',
-            email:'',
-            phone:'',
-            password:''
+        return {
+            errors: [],
+            user: {
+                title:'',
+                medium:'',
+                first_name:'',
+                last_name:'',
+                email:'',
+                phone:'',
+                password:''
+            }
         }
-      }
-  },
-  methods: {
-    register(){
-        let component = this;
-        this.$store.dispatch('register', component.user)
-        .then(() => component.$router.push({name:'Login'}))
-        .catch(err => console.log(err))
     },
-    checkForm: function (e) {
-        if (this.user.title && this.user.first_name && this.user.last_name && this.user.email && this.user.phone && this.user.password) {
-        this.register();
-        return true;
-        }
+    methods: {
+        register(){
+            let component = this;
+            this.$store.dispatch('addUser', [component.user,this.$store.state.auth.headers])
+            .then((resp) => {component.$router.push('/admin/users')})
+            .catch(err => console.log(err))
+        },
+        checkForm: function (e) {
+            if (this.user.title && this.user.first_name && this.user.last_name && this.user.email && this.user.phone && this.user.password) {
+            this.register();
+            return true;
+            }
 
-        this.errors = [];
-        if (!this.user.title) {
-        this.errors.push('Title required.');
-        return false;
-        }
-        if (!this.user.first_name) {
-        this.errors.push('FirstName required.');
-        return false;
-        }
-        if (!this.user.last_name) {
-        this.errors.push('LastName required.');
-        return false;
-        }
-        if (!this.user.phone) {
-        this.errors.push('Phone Number required.');
-        return false;
-        }
-        if (!this.user.email) {
-        this.errors.push('Email required.');
-        return false;
-        }else if (!this.validEmail(this.user.email)) {
-        this.errors.push('Valid email required.');
-        return false;
-        }
-        if (!this.user.password) {
-        this.errors.push('Password required.');
-        return false;
-        }
-        e.preventDefault();
+            this.errors = [];
+            if (!this.user.title) {
+            this.errors.push('Title required.');
+            return false;
+            }
+            if (!this.user.first_name) {
+            this.errors.push('FirstName required.');
+            return false;
+            }
+            if (!this.user.last_name) {
+            this.errors.push('LastName required.');
+            return false;
+            }
+            if (!this.user.phone) {
+            this.errors.push('Phone Number required.');
+            return false;
+            }
+            if (!this.user.email) {
+            this.errors.push('Email required.');
+            return false;
+            }else if (!this.validEmail(this.user.email)) {
+            this.errors.push('Valid email required.');
+            return false;
+            }
+            if (!this.user.password) {
+            this.errors.push('Password required.');
+            return false;
+            }
+            e.preventDefault();
 
-    },
-    validEmail: function (email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
+        },
+        validEmail: function (email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
     }
-  }
 }
 </script>

@@ -1,11 +1,17 @@
 import axios from 'axios'
 import {config} from '../../config'
+const Cookie = process.client ? require('js-cookie') : undefined
+
 
 const login = (data) => {
     return new Promise((resolve, reject) => {
         axios.post(config.apiUrl + '/api/login', data)
             .then(resp => {
-                axios.defaults.headers.common['Authoriztion'] = 'Bearer '+resp.data.token
+                const token = resp.data.token
+                const user = resp.data.user
+                Cookie.set('jwtToken', token)
+                Cookie.set('user', user)
+                axios.defaults.headers.common['Authorization'] = resp.data.token
                 resolve(resp)
             })
             .catch(err => {
@@ -14,9 +20,9 @@ const login = (data) => {
     })
 }
 
-const allUser = () => {
+const allUser = (header) => {
     return new Promise((resolve, reject) => {
-        axios.get(config.apiUrl + '/api/users')
+        axios.get(config.apiUrl + '/api/users', { headers: { Authorization: header } })
             .then(resp => {
                 resolve(resp)
             })
@@ -26,9 +32,9 @@ const allUser = () => {
     })
 }
 
-const userById = (data) => {
+const userById = (data, header) => {
     return new Promise((resolve, reject) => {
-        axios.get(config.apiUrl + '/api/user/'+data)
+        axios.get(config.apiUrl + '/api/user/'+data, {headers:{ Authorization: header}})
             .then(resp => {
                 resolve(resp)
             })
@@ -40,8 +46,7 @@ const userById = (data) => {
 
 const forgetPassword = (data) => {
     return new Promise((resolve, reject) => {
-        commit('auth_request')
-        axios.post(state.apiUrl + '/api/forget_password', data)
+        axios.post(config.apiUrl + '/api/forget_password', data)
             .then(resp => {
                 resolve(resp)
             })
@@ -51,10 +56,9 @@ const forgetPassword = (data) => {
     })
 }
 
-const register = (data) => {
+const register = (data, header) => {
     return new Promise((resolve, reject) => {
-        commit('auth_request')
-        axios.post(state.apiUrl + '/api/register', data)
+        axios.post(config.apiUrl + '/api/register', data, { headers: { Authorization: header } })
             .then(resp => {
                 resolve(resp)
             })
@@ -64,9 +68,9 @@ const register = (data) => {
     })
 }
 
-const update = (data) => {
+const update = (data, header) => {
     return new Promise((resolve, reject) => {
-        axios.patch(state.apiUrl + '/api/user/update/' + data._id, data)
+        axios.patch(config.apiUrl + '/api/user/update/' + data._id, data, { headers: { Authorization: header } })
             .then(resp => {
                 resolve(resp)
             })
@@ -76,9 +80,9 @@ const update = (data) => {
     })
 }
 
-const activity = (data) => {
+const activity = (data,header) => {
     return new Promise((resolve, reject) => {
-        axios.get(state.apiUrl + '/api/my_activities/' + user._id)
+        axios.get(config.apiUrl + '/api/my_activities/' + data, { headers: { Authorization: header } })
             .then(resp => {
                 resolve(resp)
             })
@@ -88,9 +92,11 @@ const activity = (data) => {
     })
 }
 
-const logout = ()  => {
+const logout = (header)  => {
     return new Promise((resolve, reject) => {
-        axios.get(state.apiUrl + '/api/logout').then(resp => {
+        axios.get(config.apiUrl + '/api/logout', { headers: { Authorization: header } }).then(resp => {
+            Cookie.remove('jwtToken')
+            Cookie.remove('user')
             delete axios.defaults.headers.common['Authorization']
             resolve(resp)
         }).catch(err => {
@@ -99,9 +105,9 @@ const logout = ()  => {
     })
 }
 
-const deleteUser = (data) => {
+const deleteUser = (data, header) => {
     return new Promise((resolve, reject) => {
-        axios.delete(state.apiUrl + '/api/user/' + data)
+        axios.delete(config.apiUrl + '/api/user/' + data, { headers: { Authorization: header } })
             .then(resp => {
                 resolve(resp)
             })
