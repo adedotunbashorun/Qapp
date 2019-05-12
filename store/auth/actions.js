@@ -132,7 +132,7 @@ export const actions = {
       try {
         token = parsed.jwtToken
         user = JSON.parse(parsed.user)
-        commit(LOGIN_SUCCESS, { token, user })
+        // commit(LOGIN_SUCCESS, { token, user })
       } catch (err) {
         // No valid cookie found
       }
