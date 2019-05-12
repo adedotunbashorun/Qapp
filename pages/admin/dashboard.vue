@@ -4,6 +4,7 @@
 <script>
 import Dashboard from '~/components/Admin/dashboard.vue'
 export default {
+    middleware: 'auth',
     layout: 'admin',
     components:{
         Dashboard
