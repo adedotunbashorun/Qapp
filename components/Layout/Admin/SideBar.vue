@@ -83,15 +83,21 @@
     </aside>
 </template>
 <script>
+const Cookie = process.client ? require('js-cookie') : undefined
 export default {
     methods:{
         logoutUser() {
           let component = this;
           this.$store.dispatch('logout',this.$store.state.auth.headers)
           .then(() => {
+            Cookie.remove('jwtToken')
+            Cookie.remove('user')
             this.$router.go('/')
           })
-          .catch(err =>  console.log())
+          .catch(err => {
+              Cookie.remove('jwtToken')
+              Cookie.remove('user')
+          })
       },
     }
 }

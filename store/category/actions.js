@@ -84,21 +84,6 @@ export const actions = {
         reject(err)
       })  
     })
-  },
-
-  nuxtServerInit({ commit }, { req }) {
-    let token = '', CATEGORY = {}
-    if (req.headers.cookie) {
-      const parsed = cookieparser.parse(req.headers.cookie)
-      try {
-        token = parsed.jwtToken
-        CATEGORY = JSON.parse(parsed.CATEGORY)
-        commit(LOGIN_SUCCESS, { token, CATEGORY })
-      } catch (err) {
-        // No valid cookie found
-      }
-    }
-    
   }
 }
 

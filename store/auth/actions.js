@@ -113,7 +113,7 @@ export const actions = {
       })  
     })
   },
-  logout({ commit },header){
+  logout({ commit }, header){
     commit(LOGOUT)
     return new Promise((resolve, reject) => {
       Api.User.logout(header).then(response => {
