@@ -1,9 +1,9 @@
 import axios from 'axios'
 import {config} from '../../config'
 
-const allCategory = (header) => {
+const allQuestions = (header) => {
     return new Promise((resolve, reject) => {
-        axios.get(config.apiUrl + '/api/categories', { headers: { Authorization: header } })
+        axios.get(config.apiUrl + '/api/questions', { headers: { Authorization: header } })
             .then(resp => {
                 resolve(resp)
             })
@@ -13,9 +13,9 @@ const allCategory = (header) => {
     })
 }
 
-const categoryById = (data, header) => {
+const questionById = (data, header) => {
     return new Promise((resolve, reject) => {
-        axios.get(config.apiUrl + '/api/category/'+data, {headers:{ Authorization: header}})
+        axios.get(config.apiUrl + '/api/question/'+data, {headers:{ Authorization: header}})
             .then(resp => {
                 resolve(resp)
             })
@@ -25,9 +25,9 @@ const categoryById = (data, header) => {
     })
 }
 
-const addCategory = (data, header) => {
+const addQuestion = (data, header) => {
     return new Promise((resolve, reject) => {
-        axios.post(config.apiUrl + '/api/category', data, { headers: { Authorization: header } })
+        axios.post(config.apiUrl + '/api/question', data, { headers: { Authorization: header } })
             .then(resp => {
                 resolve(resp)
             })
@@ -37,9 +37,9 @@ const addCategory = (data, header) => {
     })
 }
 
-const updateCategory = (data, header) => {
+const updateQuestion = (data, header) => {
     return new Promise((resolve, reject) => {
-        axios.patch(config.apiUrl + '/api/category/' + data._id, data, { headers: { Authorization: header } })
+        axios.patch(config.apiUrl + '/api/question/' + data._id, data, { headers: { Authorization: header } })
             .then(resp => {
                 resolve(resp)
             })
@@ -49,9 +49,9 @@ const updateCategory = (data, header) => {
     })
 }
 
-const deleteCategory = (data, header) => {
+const deleteQuestion = (data, header) => {
     return new Promise((resolve, reject) => {
-        axios.delete(config.apiUrl + '/api/category/' + data, { headers: { Authorization: header } })
+        axios.delete(config.apiUrl + '/api/question/' + data, { headers: { Authorization: header } })
             .then(resp => {
                 resolve(resp)
             })
@@ -61,10 +61,10 @@ const deleteCategory = (data, header) => {
     })
 }
 
-export const Category = {
-    allCategory,
-    categoryById,
-    deleteCategory,
-    addCategory,
-    updateCategory
+export const Question = {
+    allQuestions,
+    questionById,
+    addQuestion,
+    deleteQuestion,
+    updateQuestion
 }

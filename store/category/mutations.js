@@ -11,10 +11,11 @@ import {
   REMOVE_CATEGORY_FAILURE,
   ALL_CATEGORYS,
   ALL_CATEGORYS_SUCCESS,
-  LOGIN_SUCCESS,
   ERROR_MSG,
   CATEGORY_BY_ID_FAILURE,
   ALL_CATEGORYS_FAILURE,
+  UPDATE_CATEGORY_FAILURE,
+  ADD_CATEGORY_FAILURE,
 } from './mutation-types'
 
 export const mutations = {
@@ -35,28 +36,33 @@ export const mutations = {
     state.showLoader = true
   },
   [CATEGORY_BY_ID_SUCCESS] (state, payload) {
-    state.showLoader = false,
-    state.category = payload.category
+    state.showLoader = false
   },
   [CATEGORY_BY_ID_FAILURE](state, payload) {
     state.showLoader = false
     state.error = payload
-    state.token = ''
-    state.category = ''
   },
-  [ADD_CATEGORY]: (state, payload) => {
+  [ADD_CATEGORY]: (state) => {
     state.showLoader = true
   },
   [ADD_CATEGORY_SUCCESS]: (state, payload) => {
     state.showLoader = false
     state.categories.push(payload)
   },
-  [UPDATE_CATEGORY]: (state, payload) => {
+  [ADD_CATEGORY_FAILURE]: (state, payload) => {
+    state.showLoader = false
+    state.error = payload
+  },
+  [UPDATE_CATEGORY]: (state) => {
     state.showLoader = true
   },
   [UPDATE_CATEGORY_SUCCESS]: (state, payload) => {
     state.showLoader = false
     state.category = payload.category
+  },
+  [UPDATE_CATEGORY_FAILURE]: (state, payload) => {
+    state.showLoader = false
+    state.error = payload
   },
   [REMOVE_CATEGORY]: (state, payload) => {
     state.showLoader = true

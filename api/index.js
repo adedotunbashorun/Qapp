@@ -1,7 +1,9 @@
-import { User } from './User/index'
-import { Category } from './Category/index'
+import { User } from './User'
+import { Category } from './Category'
+import { Question } from './Question'
 
 export const Api =  {
     User,
     Category,
+    Question
 }

@@ -6,6 +6,11 @@ export const LOGIN = 'LOGIN'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 
+
+export const LOGOUT = 'LOGOUT'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
+
 export const USER_BY_ID = 'USER_BY_ID'
 export const USER_BY_ID_SUCCESS = 'USER_BY_ID_SUCCESS'
 export const USER_BY_ID_FAILURE = "USER_BY_ID_FAILURE"

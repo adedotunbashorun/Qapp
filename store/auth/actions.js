@@ -20,6 +20,9 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
   ACTIVITY,
   ACTIVITY_SUCCESS
 } from './mutation-types'
@@ -111,11 +114,13 @@ export const actions = {
     })
   },
   logout({ commit },header){
+    commit(LOGOUT)
     return new Promise((resolve, reject) => {
       Api.User.logout(header).then(response => {
-        commit(LOGIN_FAILURE, {})
+        commit(LOGOUT_SUCCESS, response.data)
         resolve(response)
       }).catch(err => {
+        commit(LOGOUT_FAILURE, err)
         reject(err)
       }) 
     })

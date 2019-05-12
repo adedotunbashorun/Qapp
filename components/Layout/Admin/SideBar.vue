@@ -48,7 +48,7 @@
                 <span><strong>Questions</strong></span>
             </nuxt-link>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
             <a class="nav-link " href="aoi.html">
                 <i class="material-icons">map</i>
                 <span><strong>AOI</strong></span>
@@ -71,9 +71,9 @@
                 <i class="material-icons">money</i>
                 <span><strong>Billing</strong></span>
             </a>
-            </li>
+            </li> -->
             <li class="nav-item">
-            <a class="nav-link " @click="logoutUser()">
+            <a class="nav-link " @click="logoutUser">
                 <i class="material-icons">logout</i>
                 <span><strong>Logout</strong></span>
             </a>
@@ -89,7 +89,7 @@ export default {
           let component = this;
           this.$store.dispatch('logout',this.$store.state.auth.headers)
           .then(() => {
-            component.$router.push('/') 
+            this.$router.go('/')
           })
           .catch(err =>  console.log())
       },

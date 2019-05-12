@@ -116,6 +116,7 @@
 
 </template>
 <script>
+import Adedotun from '../../Extra/adedotun'
 export default {
     data(){
       return {
@@ -130,6 +131,9 @@ export default {
         },
         activities:[]
       }
+  },
+  components:{
+      Adedotun
   },
   mounted(){
       this.getUser()

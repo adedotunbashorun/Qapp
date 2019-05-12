@@ -59,11 +59,12 @@ export default {
           let component = this;
           this.$store.dispatch('login', component.user)
           .then((resp) => {
-            (this.$store.state.auth.error != '') ? 
-              component.errors.push(this.$store.state.auth.error) :
-                                                this.$router.push('/admin/dashboard') 
+              this.$router.go('/admin/dashboard') 
           })
-          .catch(err =>  console.log())
+          .catch(err =>  {
+            component.errors.push(err)
+            console.log(err)
+          })
       },
       checkForm: function (e) {
         if (this.user.email && this.user.password) {

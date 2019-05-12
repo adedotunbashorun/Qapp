@@ -3,25 +3,24 @@
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-            <h3 class="page-title">Add Question</h3>
-            <span class="text-uppercase page-subtitle">Fill form to create new question</span>
+            <h3 class="page-title">Edit Question</h3>
+            <span class="text-uppercase page-subtitle">Fill form to edit a question</span>
             </div>
         </div>
         <!-- End Page Header -->
 
         <!-- Button -->
         <div class="row">
-        <div class="col">
-            <nuxt-link to="/admin/questions">
-            <button type="button" class="mb-2 btn btn-outline-primary mr-2">Go back</button></nuxt-link>
-        </div>
+            <div class="col">
+                <nuxt-link to="/admin/questions">
+                <button type="button" class="mb-2 btn btn-outline-primary mr-2">Go back</button></nuxt-link>
+            </div>
         </div>
         <!-- / Button -->            
 
         <!-- Form -->
         <div class="row">
-            <div class="col">
-                <strong class="text-muted d-block mb-2"></strong>
+            <div class="card card-small mb-4 col-md-4" >
                 <form @submit.prevent="checkForm">
                     <div class="form-group" style="max-width: 30%">
                         <div class="input-group mb-3">
@@ -50,62 +49,72 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                        <button type="submit" class="mb-2 btn btn-primary mr-2">Add Question</button>
+                        <button type="submit" class="mb-2 btn btn-primary mr-2">Update question</button>
                         </div>
                     </div>
                 </form>
             </div>
+            <div class="col-md-8">
+                
+            </div>
         </div>
-        <!-- End Form -->
-
-        <!-- Button -->
-        
-        <!-- / Button --> 
     </div>
 
 </template>
 <script>
+import Adedotun from '../../Extra/adedotun'
 export default {
     props:['categories'],
     data(){
-        return {
-            errors: [],
-            question: {
-                category_id: '',
-                subject:'',
-                description:''
-            }
+      return {
+        errors: [],
+        question: {
+            subject:'',
+            description:'',
+            category_id:''
         }
+      }
+  },
+  mounted(){
+      this.getQuestion()
+  },
+  components:{
+      Adedotun
+  },
+  methods: {
+    getQuestion(){
+        this.$store.dispatch('questionById', [this.$nuxt._route.params.id,this.$store.state.auth.headers])
+        .then((resp) => {
+            return this.question = resp.data.question
+        }).catch(err => console.log())
     },
-    methods: {
-        register(){
-            let component = this;
-            this.$store.dispatch('addQuestion', [component.question,this.$store.state.auth.headers])
-            .then((resp) => {this.$router.push('/admin/question')})
-            .catch(err => console.log(err))
-        },
-        checkForm: function (e) {
-            if (this.question.category_id && this.question.subject && this.question.description) {
-            this.register();
-            return true;
-            }
-
-            this.errors = [];
-            if (!this.question.category_id) {
-            this.errors.push('Category required.');
-            return false;
-            }
-            if (!this.question.subject) {
-            this.errors.push('Name required.');
-            return false;
-            }
-            if (!this.question.description) {
-            this.errors.push('Description required.');
-            return false;
-            }
-            e.preventDefault();
+    update(){
+        let component = this;
+        this.$store.dispatch('updateQuestion', [component.question,this.$store.state.auth.headers])
+        .then((resp) => { this.$router.push('/admin/questions')})
+        .catch(err => console.log(err))
+    },
+    checkForm: function (e) {
+        if (this.question.category_id && this.question.subject && this.question.description) {
+        this.update();
+        return true;
         }
+
+        this.errors = [];
+        if (!this.question.category_id) {
+        this.errors.push('Category required.');
+        return false;
+        }
+        if (!this.question.subject) {
+        this.errors.push('Subject required.');
+        return false;
+        }
+        if (!this.question.description) {
+        this.errors.push('Description required.');
+        return false;
+        }
+        e.preventDefault();
     }
+  }
 }
 </script>
-

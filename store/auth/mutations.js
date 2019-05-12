@@ -14,6 +14,9 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
   ERROR_MSG,
   USER_BY_ID_FAILURE,
   ALL_USERS_FAILURE,
@@ -49,6 +52,20 @@ export const mutations = {
     state.error = payload
     state.token = ''
     state.user = ''
+  },
+  [LOGOUT](state) {
+    state.showLoader = true
+  },
+  [LOGOUT_SUCCESS](state, payload) {
+    state.showLoader = false
+    state.user = {}
+    state.headers = ''
+    state.error = ''
+    state.token = ''
+  },
+  [LOGOUT_FAILURE](state, payload) {
+    state.showLoader = false
+    state.error = payload
   },
   [USER_BY_ID] (state) {
     state.showLoader = true
