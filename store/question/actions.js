@@ -1,5 +1,4 @@
 import { Api } from '../../api'
-const cookieparser = process.server ? require('cookieparser') : undefined
 
 import {
   ADD_QUESTION,
@@ -16,8 +15,7 @@ import {
   REMOVE_QUESTION_FAILURE,
   ALL_QUESTIONS,
   ALL_QUESTIONS_SUCCESS,
-  ALL_QUESTIONS_FAILURE,
-  LOGIN_SUCCESS
+  ALL_QUESTIONS_FAILURE
 } from './mutation-types'
 
 export const actions = {

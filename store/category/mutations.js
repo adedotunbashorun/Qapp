@@ -16,6 +16,9 @@ import {
   ALL_CATEGORYS_FAILURE,
   UPDATE_CATEGORY_FAILURE,
   ADD_CATEGORY_FAILURE,
+  ALL_CATEGORYS_QUESTION_FAILURE,
+  ALL_CATEGORYS_QUESTION_SUCCESS,
+  ALL_CATEGORYS_QUESTION
 } from './mutation-types'
 
 export const mutations = {
@@ -30,6 +33,17 @@ export const mutations = {
     state.showLoader = false
     state.error = payload
     state.categories = []
+  },
+
+  [ALL_CATEGORYS_QUESTION](state) {
+    state.showLoader = true
+  },
+  [ALL_CATEGORYS_QUESTION_SUCCESS](state, payload) {
+    state.showLoader = false
+  },
+  [ALL_CATEGORYS_QUESTION_FAILURE](state, payload) {
+    state.showLoader = false
+    state.error = payload
   },
 
   [CATEGORY_BY_ID] (state) {

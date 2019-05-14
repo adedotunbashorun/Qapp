@@ -82,7 +82,7 @@
                     <!-- End Form -->
                 </form>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8" v-if="activities.length > 0">
                 <div class="card card-small mb-4">
                     <div class="card-header border-bottom">
                     <h6 class="m-0">Activiting Log</h6>
@@ -111,6 +111,39 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-12" v-if="schedules.length > 0">
+                <div class="card card-small mb-4">
+                    <div class="card-header border-bottom">
+                    <h6 class="m-0">Schedule Log</h6>
+                    </div>
+                    <div class="card-body p-0 pb-3 text-center">
+                        <table class="table mb-0">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">S/N</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col"> Question</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(schedule,index) in schedules" :key="index">
+                                <th scope="row">
+                                    {{ index+1 }}
+                                </th>
+                                <td>
+                                    {{ schedule.category_id.name }}
+                                </td>
+                                <td>
+                                    {{ schedule.question_id.subject }}
+                                </td>
+                                <td><Adedotun :value="schedule.createdAt" fn="humandate" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -129,7 +162,8 @@ export default {
             email:'',
             phone:''
         },
-        activities:[]
+        activities:[],
+        schedules:[]
       }
   },
   components:{
@@ -138,6 +172,7 @@ export default {
   mounted(){
       this.getUser()
       this.activityLogs()
+      this.userSchedule()
   },
   methods: {
     getUser(){
@@ -150,6 +185,12 @@ export default {
         this.$store.dispatch('activity', [this.$nuxt._route.params.id,this.$store.state.auth.headers])
         .then((resp) => {
             this.activities = resp.data.activities
+        }).catch(err => console.log())
+    },
+    userSchedule(){
+        this.$store.dispatch('userSchedules', [this.$nuxt._route.params.id,this.$store.state.auth.headers])
+        .then((resp) => {
+            this.schedules = resp.data.schedules
         }).catch(err => console.log())
     },
     update(){

@@ -54,19 +54,23 @@
                             <thead class="thead-dark">
                                 <tr>
                                 <th scope="col">S/N</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">Subject</th>
+                                <th scope="col">Question</th>
                                 <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(activity,index) in questions" :key="index">
+                                <tr v-for="(q,index) in questions" :key="index">
                                 <th scope="row">
                                     {{ index+1 }}
                                 </th>
                                 <td>
-                                    {{ activity.description }}
+                                    {{ q.subject }}
                                 </td>
-                                <td><Adedotun :value="activity.createdAt" fn="humandate" /></td>
+                                <td>
+                                    {{ q.description }}
+                                </td>
+                                <td><Adedotun :value="q.createdAt" fn="humandate" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -92,7 +96,7 @@ export default {
   },
   mounted(){
       this.getCategory()
-    //   this.activityLogs()
+      this.getQuestions()
   },
   components:{
       Adedotun
@@ -104,10 +108,10 @@ export default {
              this.data = resp.data.category
         }).catch(err => console.log())
     },
-    activityLogs(){
-        this.$store.dispatch('activity', [this.$nuxt._route.params.id,this.$store.state.auth.headers])
+    getQuestions(){
+        this.$store.dispatch('allCategoryQuestions', [this.$nuxt._route.params.id,this.$store.state.auth.headers])
         .then((resp) => {
-            this.activities = resp.data.activities
+            this.questions = resp.data.questions
         }).catch(err => console.log())
     },
     update(){

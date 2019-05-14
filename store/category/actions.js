@@ -1,5 +1,4 @@
 import { Api } from '../../api'
-const cookieparser = process.server ? require('cookieparser') : undefined
 
 import {
   ADD_CATEGORY,
@@ -17,7 +16,9 @@ import {
   ALL_CATEGORYS,
   ALL_CATEGORYS_SUCCESS,
   ALL_CATEGORYS_FAILURE,
-  LOGIN_SUCCESS
+  ALL_CATEGORYS_QUESTION_FAILURE,
+  ALL_CATEGORYS_QUESTION_SUCCESS,
+  ALL_CATEGORYS_QUESTION
 } from './mutation-types'
 
 export const actions = {
@@ -29,6 +30,19 @@ export const actions = {
         resolve(response)
       }).catch(err => {
         commit(ALL_CATEGORYS_FAILURE, err)
+        reject(err)
+      })
+    })
+  },
+
+  allCategoryQuestions({ commit }, [payload,header]) {
+    commit(ALL_CATEGORYS_QUESTION)
+    return new Promise((resolve, reject) => {
+      Api.Category.allCategoryQuestions(payload,header).then(response => {
+        commit(ALL_CATEGORYS_QUESTION_SUCCESS, response.data)
+        resolve(response)
+      }).catch(err => {
+        commit(ALL_CATEGORYS_QUESTION_FAILURE, err)
         reject(err)
       })
     })

@@ -48,13 +48,13 @@
                 <span><strong>Questions</strong></span>
             </nuxt-link>
             </li>
-            <!-- <li class="nav-item">
-            <a class="nav-link " href="aoi.html">
-                <i class="material-icons">map</i>
-                <span><strong>AOI</strong></span>
-            </a>
-            </li>
             <li class="nav-item">
+            <nuxt-link class="nav-link " :to="{name: 'admin-schedules'}">
+                <i class="material-icons">schedule</i>
+                <span><strong>Schedules</strong></span>
+            </nuxt-link>
+            </li>
+            <!-- <li class="nav-item">
             <a class="nav-link " href="data.html">
                 <i class="material-icons">save</i>
                 <span><strong>Data</strong></span>

@@ -13,6 +13,18 @@ const allCategory = (header) => {
     })
 }
 
+const allCategoryQuestions = (data,header) => {
+    return new Promise((resolve, reject) => {
+        axios.get(config.apiUrl + '/api/questions/'+data, { headers: { Authorization: header } })
+            .then(resp => {
+                resolve(resp)
+            })
+            .catch(err => {
+                reject(err)
+            })
+    })
+}
+
 const categoryById = (data, header) => {
     return new Promise((resolve, reject) => {
         axios.get(config.apiUrl + '/api/category/'+data, {headers:{ Authorization: header}})
@@ -66,5 +78,6 @@ export const Category = {
     categoryById,
     deleteCategory,
     addCategory,
-    updateCategory
+    updateCategory,
+    allCategoryQuestions
 }
