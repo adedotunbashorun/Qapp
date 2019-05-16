@@ -40,7 +40,7 @@
                     <tbody>
                         <tr v-for="(question, index) in questions" :key="index">
                             <td>{{ index + 1}}</td>                            
-                            <td>{{ (question.category_id.name) ? question.category_id.name : ''}}</td>
+                            <td>{{ (question.category_id != null) ? question.category_id.name : ''}}</td>
                             <td>{{ question.subject}}</td>
                             <td>{{question.description}}</td>
                             <td>
