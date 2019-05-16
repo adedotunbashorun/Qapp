@@ -65,7 +65,7 @@ export default {
               const user = resp.data.user
               this.$store.commit('LOGIN_SUCCESS', {token, user})              
               Cookie.set('jwtToken', token)
-              Cookie.set('user', user)
+              Cookie.set('user', user) 
               this.$router.go('/admin/dashboard') 
           })
           .catch(err =>  {
