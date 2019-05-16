@@ -44,8 +44,8 @@
                                         <span class="d-none d-md-inline-block">Action</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-small">
-                                        <nuxt-link class="dropdown-item" :to="{name: 'admin-category-id', params:{id : schedule._id}}">
-                                        <i class="material-icons">&#xE7FD;</i>View Schedule</nuxt-link>
+                                        <!-- <nuxt-link class="dropdown-item" :to="{name: 'admin-category-id', params:{id : schedule._id}}">
+                                        <i class="material-icons">&#xE7FD;</i>View Schedule</nuxt-link> -->
                                     </div>
                                     </li>
                                 </ul>
