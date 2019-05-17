@@ -32,7 +32,9 @@ export default {
                 { rel: 'stylesheet',href: 'https://buttons.github.io/buttons.js'},
                 { rel: 'stylesheet',href: 'https://fonts.googleapis.com/css?family=Overpass|Raleway'},
                 { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' },
-                { rel: 'stylesheet',href: '/styled.css'}
+                { rel: 'stylesheet',href: '/styled.css'},
+                { rel: 'stylesheet', href: '/styles/toastr/toastr.min.css'},
+                { rel: 'stylesheet', href:'//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css'}
             ],
             script: [        
                 { src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js' },
@@ -43,7 +45,10 @@ export default {
                 { src: 'https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js' },
                 { src: '/scripts/extras.1.1.0.min.js' },
                 { src: '/scripts/shards-dashboards.1.1.0.min.js' },
-                { src: '/scripts/app/app-blog-overview.1.1.0.js' }
+                { src: '/scripts/app/app-blog-overview.1.1.0.js' },
+                { src: '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'},
+                { src: '/scripts/toastr/toastr.init.js' },
+                { src: '/scripts/toastr/toastr.min.js' }
             ]
         }
     },

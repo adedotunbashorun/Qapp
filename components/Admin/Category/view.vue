@@ -50,7 +50,7 @@
                     <h6 class="m-0">Category Question</h6>
                     </div>
                     <div class="card-body p-0 pb-3 text-center">
-                        <table class="table mb-0">
+                        <table id="question-table" class="table mb-0">
                             <thead class="thead-dark">
                                 <tr>
                                 <th scope="col">S/N</th>
@@ -95,8 +95,11 @@ export default {
       }
   },
   mounted(){
-      this.getCategory()
-      this.getQuestions()
+        this.getCategory()
+        this.getQuestions()
+        setTimeout(() => {
+            $('#question-table').DataTable({})
+        },2000)
   },
   components:{
       Adedotun

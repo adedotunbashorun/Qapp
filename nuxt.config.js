@@ -14,12 +14,10 @@ export default {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'shortcut icon', href: '/images/Blueform_LOGO_MARK_COLORED_NO_BG.png' },
-      { rel: 'stylesheet', href: '/styles/toastr/toastr.min.css'}
+      { rel: 'shortcut icon', href: '/images/Blueform_LOGO_MARK_COLORED_NO_BG.png' }
     ],
     script: [
-      { src: '/scripts/toastr/toastr.init.js' },
-      { src: '/scripts/toastr/toastr.min.js' },
+      
     ]
   },
 

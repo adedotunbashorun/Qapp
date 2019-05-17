@@ -19,7 +19,7 @@
                 <h6 class="m-0">Schedule Listing</h6>
                 </div>
                 <div class="card-body p-0 pb-3 text-center">
-                <table class="table mb-0">
+                <table id="schedule-table" class="table mb-0">
                     <thead class="bg-light">
                     <tr>
                         <th scope="col" class="border-0">#</th>
@@ -65,6 +65,11 @@
 import Adedotun from '../../Extra/adedotun'
 export default {
     props:['schedules'],
+    mounted(){
+        setTimeout(() => {
+            $('#schedule-table').DataTable({})
+        },2000)
+    },
     components:{
         Adedotun
     }

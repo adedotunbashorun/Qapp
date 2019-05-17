@@ -27,7 +27,7 @@
                 <h6 class="m-0">Users Listing</h6>
                 </div>
                 <div class="card-body p-0 pb-3 text-center">
-                <table class="table mb-0">
+                <table id="user-table" class="table" style="margin:10px;">
                     <thead class="bg-light">
                     <tr>
                         <th scope="col" class="border-0">#</th>
@@ -77,6 +77,11 @@
 <script>
 export default {
     props:['users'],
+    mounted(){
+        setTimeout(() => {
+            $('#user-table').DataTable({})
+        },2000)
+    },
     methods:{
         deleteUser(id){
             this.$store.dispatch('removeUser', [id,this.$store.state.auth.headers])

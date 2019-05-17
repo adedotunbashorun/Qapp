@@ -27,7 +27,7 @@
                 <h6 class="m-0">Category Listing</h6>
                 </div>
                 <div class="card-body p-0 pb-3 text-center">
-                <table class="table mb-0">
+                <table id="category-table" class="table mb-0">
                     <thead class="bg-light">
                     <tr>
                         <th scope="col" class="border-0">#</th>
@@ -71,6 +71,11 @@
 <script>
 export default {
     props:['categories'],
+    mounted(){
+        setTimeout(() => {
+            $('#category-table').DataTable({})
+        },2000)
+    },
     methods:{
         deleteCategory(id){
             this.$store.dispatch('removeCategory', [id,this.$store.state.auth.headers])

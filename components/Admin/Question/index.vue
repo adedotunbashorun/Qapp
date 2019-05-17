@@ -27,7 +27,7 @@
                 <h6 class="m-0">Question Listing</h6>
                 </div>
                 <div class="card-body p-0 pb-3 text-center">
-                <table class="table mb-0">
+                <table id="question-table" class="table mb-0">
                     <thead class="bg-light">
                     <tr>
                         <th scope="col" class="border-0">#</th>                        
@@ -73,6 +73,11 @@
 <script>
 export default {
     props:['questions'],
+    mounted(){
+        setTimeout(() => {
+            $('#question-table').DataTable({})
+        },2000)
+    },
     methods:{
         deleteQuestion(id){
             this.$store.dispatch('deleteQuestion', [id,this.$store.state.auth.headers])

@@ -88,7 +88,7 @@
                     <h6 class="m-0">Activiting Log</h6>
                     </div>
                     <div class="card-body p-0 pb-3 text-center">
-                        <table class="table mb-0">
+                        <table id="activity-table" class="table">
                             <thead class="thead-dark">
                                 <tr>
                                 <th scope="col">S/N</th>
@@ -118,12 +118,13 @@
                     <h6 class="m-0">Schedule Log</h6>
                     </div>
                     <div class="card-body p-0 pb-3 text-center">
-                        <table class="table mb-0">
+                        <table id="schedule-table" class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">S/N</th>
                                     <th scope="col">Category</th>
                                     <th scope="col"> Question</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -170,9 +171,14 @@ export default {
       Adedotun
   },
   mounted(){
-      this.getUser()
-      this.activityLogs()
-      this.userSchedule()
+        this.getUser()
+        this.activityLogs()
+        this.userSchedule()
+        setTimeout(() => {
+            $('#activity-table').DataTable({})
+            $('#schedule-table').DataTable({})      
+        },2000)     
+            
   },
   methods: {
     getUser(){
