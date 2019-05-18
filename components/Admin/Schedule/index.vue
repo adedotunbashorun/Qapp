@@ -19,7 +19,7 @@
                 <h6 class="m-0">Schedule Listing</h6>
                 </div>
                 <div class="card-body p-0 pb-3 text-center">
-                <table id="schedule-table" class="table mb-0">
+                <table id="schedule-table" class="table mb-0" style="margin:20px;">
                     <thead class="bg-light">
                     <tr>
                         <th scope="col" class="border-0">#</th>

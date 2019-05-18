@@ -54,6 +54,12 @@
                 <span><strong>Schedules</strong></span>
             </nuxt-link>
             </li>
+            <li class="nav-item">
+            <nuxt-link class="nav-link " :to="{name: 'admin-response'}">
+                <i class="material-icons">reply</i>
+                <span><strong>Response</strong></span>
+            </nuxt-link>
+            </li>
             <!-- <li class="nav-item">
             <a class="nav-link " href="data.html">
                 <i class="material-icons">save</i>

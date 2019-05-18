@@ -81,7 +81,10 @@ export default {
         register(){
             let component = this;
             this.$store.dispatch('addQuestion', [component.question,this.$store.state.auth.headers])
-            .then((resp) => {this.$router.push('/admin/questions')})
+            .then((resp) => { 
+                // toastr.success(resp.data.msg)
+                this.$router.push('/admin/questions')
+            })
             .catch(err => console.log(err))
         },
         checkForm: function (e) {

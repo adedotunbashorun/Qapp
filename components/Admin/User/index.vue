@@ -27,7 +27,7 @@
                 <h6 class="m-0">Users Listing</h6>
                 </div>
                 <div class="card-body p-0 pb-3 text-center">
-                <table id="user-table" class="table" style="margin:10px;">
+                <table id="user-table" class="table" style="margin:20px;">
                     <thead class="bg-light">
                     <tr>
                         <th scope="col" class="border-0">#</th>
@@ -35,7 +35,7 @@
                         <th scope="col" class="border-0">Email</th>
                         <th scope="col" class="border-0">Phone Number</th>
                         <th scope="col" class="border-0">User Type</th>
-                        <th scope="col" class="border-0">Status</th>
+                        <th scope="col" class="border-0">Is Scheduled</th>
                         <th scope="col" class="border-0"> Action </th>
                     </tr>
                     </thead>
@@ -46,7 +46,7 @@
                         <td>{{ user.email }}</td>
                         <td>{{ user.phone }}</td>                        
                         <td>{{ user.user_type }}</td>
-                        <td style="color: #3ED60E">{{ user.is_active }}</td>
+                        <td style="color: #3ED60E">{{ user.is_scheduled }}</td>
                         <td> 
                         <ul class="navbar-nav border-left flex-row ">
                             <li class="nav-item dropdown">

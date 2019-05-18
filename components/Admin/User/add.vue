@@ -46,6 +46,17 @@
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
                         </div>
+                        <select class="form-control" v-model="user.user_type">
+                            <option value="">-- User Type--</option>
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="max-width: 30%">
+                        <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        </div>
                         <select class="form-control" v-model="user.medium">
                             <option value="">-- Information Medium --</option>
                             <option value="Email">Email</option>
@@ -67,7 +78,8 @@
                         <input type="text" class="form-control" v-model="user.last_name" placeholder="Last Name" aria-label="Full name" aria-describedby="basic-addon1"> </div>
                     </div>
                     <div class="form-group" style="max-width: 30%">
-                        <input type="text" v-model="user.phone" class="form-control" placeholder="Phone Number" value=""> 
+                        <input type="tel" v-model="user.phone" pattern="[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{4}" class="form-control" placeholder="Phone Number" value="" required> 
+                        <span class="note">Format: 2349034268873</span>
                     </div>
                     
                     <div class="form-group" style="max-width: 30%">
@@ -100,6 +112,7 @@ export default {
             user: {
                 title:'',
                 medium:'',
+                user_type:'',
                 first_name:'',
                 last_name:'',
                 email:'',
