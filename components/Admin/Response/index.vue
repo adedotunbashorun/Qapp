@@ -26,6 +26,7 @@
                         <th scope="col" class="border-0">User</th>                       
                         <th scope="col" class="border-0">Question</th>                                                
                         <th scope="col" class="border-0">Response</th>
+                        <th scope="col" class="border-0"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,6 +35,7 @@
                             <td>{{ response.user_id.first_name + ' ' + response.user_id.last_name}}</td>
                             <td>{{response.question_id.subject}}</td>  
                             <td>{{response.data}}</td>
+                            <td><Adedotun :value="response.createdAt" fn="date" /></td>
                         </tr>
                     </tbody>
                 </table>
