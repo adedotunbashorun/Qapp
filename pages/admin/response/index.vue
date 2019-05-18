@@ -1,5 +1,5 @@
 <template>
-    <Response :resopnses="resopnses"/>
+    <Response :responses="responses"/>
 </template>
 <script>
 import Response from '~/components/Admin/Response/index.vue'
@@ -11,7 +11,7 @@ export default {
     data(){
         return {
             errors: [],
-            resopnses: []
+            responses: []
         }
     },
     mounted(){
@@ -19,10 +19,10 @@ export default {
     },
     methods:{
         allSchedules(){
-            // this.$store.dispatch('allSchedules', this.$store.state.auth.headers)
-            // .then((resp) => {
-            //     this.schedules = resp.data.schedules
-            // }).catch(err => console.log())
+            this.$store.dispatch('allResponse', this.$store.state.auth.headers)
+            .then((resp) => {
+                this.responses = resp.data.responses
+            }).catch(err => console.log())
         }
     }
 }

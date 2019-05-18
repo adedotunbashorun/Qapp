@@ -8,10 +8,14 @@ import {
   ALL_SCHEDULES_FAILURE,
   ALL_USER_SCHEDULES,
   ALL_USER_SCHEDULES_SUCCESS,
-  ALL_USER_SCHEDULES_FAILURE
+  ALL_USER_SCHEDULES_FAILURE,
+  ALL_RESPONSES,
+  ALL_RESPONSES_SUCCESS,
+  ALL_RESPONSES_FAILURE
 } from './mutation-types'
 
 export const mutations = {
+  
   [ALL_SCHEDULES] (state) {
     state.showLoader = true
   },
@@ -23,6 +27,19 @@ export const mutations = {
     state.showLoader = false
     state.error = payload
     state.categories = []
+  },
+
+  [ALL_RESPONSES](state) {
+    state.showLoader = true
+  },
+  [ALL_RESPONSES_SUCCESS](state, payload) {
+    state.showLoader = false
+    state.responses = payload.responses
+  },
+  [ALL_RESPONSES_FAILURE](state, payload) {
+    state.showLoader = false
+    state.error = payload
+    state.responses = []
   },
 
   [ALL_USER_SCHEDULES](state) {

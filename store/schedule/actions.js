@@ -9,7 +9,10 @@ import {
   ALL_SCHEDULES_FAILURE,
   ALL_USER_SCHEDULES,
   ALL_USER_SCHEDULES_SUCCESS,
-  ALL_USER_SCHEDULES_FAILURE
+  ALL_USER_SCHEDULES_FAILURE,
+  ALL_RESPONSES,
+  ALL_RESPONSES_SUCCESS,
+  ALL_RESPONSES_FAILURE
 } from './mutation-types'
 
 export const actions = {
@@ -21,6 +24,19 @@ export const actions = {
         resolve(response)
       }).catch(err => {
         commit(ALL_SCHEDULES_FAILURE, err)
+        reject(err)
+      })
+    })
+  },
+
+  allResponse({ commit }, header) {
+    commit(ALL_RESPONSES)
+    return new Promise((resolve, reject) => {
+      Api.Response.allResponse(header).then(response => {
+        commit(ALL_RESPONSES_SUCCESS, response.data)
+        resolve(response)
+      }).catch(err => {
+        commit(ALL_RESPONSES_FAILURE, err)
         reject(err)
       })
     })

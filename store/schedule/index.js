@@ -7,6 +7,7 @@ import { actions } from './actions'
 export default {
   state: {
     schedules: [],
+    responses: [],
     error: '',
     schedule: {},
     showLoader: false,

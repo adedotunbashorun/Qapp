@@ -26,28 +26,14 @@
                         <th scope="col" class="border-0">User</th>                       
                         <th scope="col" class="border-0">Question</th>                                                
                         <th scope="col" class="border-0">Response</th>
-                        <th scope="col" class="border-0">Action </th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(schedule, index) in resopnses" :key="index">
+                        <tr v-for="(response, index) in responses" :key="index">
                             <td>{{ index + 1}}</td>
-                            <td>{{ schedule.user_id.first_name + ' ' + schedule.user_id.last_name}}</td>
-                            <td>{{schedule.question_id.subject}}</td>  
-                            <td>{{schedule.data}}</td>
-                            <td>
-                                <ul class="navbar-nav border-left flex-row ">
-                                    <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <span class="d-none d-md-inline-block">Action</span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-small">
-                                        <!-- <nuxt-link class="dropdown-item" :to="{name: 'admin-category-id', params:{id : schedule._id}}">
-                                        <i class="material-icons">&#xE7FD;</i>View Schedule</nuxt-link> -->
-                                    </div>
-                                    </li>
-                                </ul>
-                            </td>
+                            <td>{{ response.user_id.first_name + ' ' + response.user_id.last_name}}</td>
+                            <td>{{response.question_id.subject}}</td>  
+                            <td>{{response.data}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -62,7 +48,7 @@
 <script>
 import Adedotun from '../../Extra/adedotun'
 export default {
-    props:['schedules'],
+    props:['responses'],
     mounted(){
         setTimeout(() => {
             $('#response-table').DataTable({})

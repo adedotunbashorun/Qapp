@@ -124,6 +124,7 @@
                                     <th scope="col">S/N</th>
                                     <th scope="col">Category</th>
                                     <th scope="col"> Question</th>
+                                    <th scope="col">Has Replied</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -138,6 +139,7 @@
                                 <td>
                                     {{ schedule.question_id.subject }}
                                 </td>
+                                <td style="color: #3ED60E">{{ schedule.is_reply }}</td>
                                 <td><Adedotun :value="schedule.createdAt" fn="humandate" /></td>
                                 </tr>
                             </tbody>
