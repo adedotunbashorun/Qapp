@@ -24,7 +24,8 @@
                     <tr>
                         <th scope="col" class="border-0">#</th>
                         <th scope="col" class="border-0">User</th>                       
-                        <th scope="col" class="border-0">Question</th>                                                
+                        <th scope="col" class="border-0">Question</th>
+                        <th scope="col" class="border-0">Phone</th>                                                
                         <th scope="col" class="border-0">Response</th>
                         <th scope="col" class="border-0"></th>
                     </tr>
@@ -34,6 +35,7 @@
                             <td>{{ index + 1}}</td>
                             <td>{{ response.user_id.first_name + ' ' + response.user_id.last_name}}</td>
                             <td>{{response.question_id.subject}}</td>  
+                            <td>{{response.from}}</td>
                             <td>{{response.data}}</td>
                             <td><Adedotun :value="response.createdAt" fn="date" /></td>
                         </tr>
