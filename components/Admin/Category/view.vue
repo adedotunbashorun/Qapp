@@ -21,7 +21,9 @@
         <!-- Form -->
         <div class="row">
             <div class="card card-small mb-4 col-md-4" >
-                <form @submit.prevent="checkForm">
+                <form @submit.prevent="checkForm">                    
+                    <div class="alert alert-success" v-if="success"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ success }}</div>                    
+                    <div class="alert alert-danger" v-if="error"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ error }}</div>
                     <div class="form-group" style="max-width: 30%">
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -91,7 +93,9 @@ export default {
             name:'',
             description:''
         },
-        questions:[]
+        questions:[],
+        success: '',
+        error:''
       }
   },
   mounted(){
@@ -120,8 +124,13 @@ export default {
     update(){
         let component = this;
         this.$store.dispatch('updateCategory', [component.data,this.$store.state.auth.headers])
-        .then((resp) => toastr.success(resp.data.msg))
-        .catch(err => console.log(err))
+        .then((resp) => {
+            this.success = resp.data.success
+        })
+        .catch(err => {
+            this.error = err.toString()
+            console.log(err)
+        })
     },
     checkForm: function (e) {
         if (this.data.name && this.data.description) {

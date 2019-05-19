@@ -30,6 +30,8 @@
                         <li class="text-danger" v-for="error in errors" :key="error">{{ error }}</li>
                         </ul>
                     </p>
+                    <div class="alert alert-success" v-if="success"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ success }}</div>                    
+                    <div class="alert alert-danger" v-if="error"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ error }}</div>
                     <div class="form-group" style="max-width: 30%">
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -118,15 +120,22 @@ export default {
                 email:'',
                 phone:'',
                 password:''
-            }
+            },
+            success: '',
+            error: ''
         }
     },
     methods: {
         register(){
             let component = this;
             this.$store.dispatch('addUser', [component.user,this.$store.state.auth.headers])
-            .then((resp) => {component.$router.push('/admin/users')})
-            .catch(err => console.log(err))
+            .then((resp) => {
+                this.success = resp.data.msg
+            })
+            .catch(err => {
+                console.log(err)
+                this.error = err.toString()
+            })
         },
         checkForm: function (e) {
             if (this.user.title && this.user.first_name && this.user.last_name && this.user.email && this.user.phone && this.user.password) {

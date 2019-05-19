@@ -31,6 +31,8 @@
                                 <li class="text-danger" v-for="error in errors" :key="error">{{ error }}</li>
                                 </ul>
                             </p>
+                            <div class="alert alert-success" v-if="success"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ success }}</div>
+                            <div class="alert alert-danger" v-if="error"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ error }}</div>
                             <div class="form-group" style="max-width: 100%">
                                 <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -166,7 +168,9 @@ export default {
             phone:''
         },
         activities:[],
-        schedules:[]
+        schedules:[],
+        success: '',
+        error: ''
       }
   },
   components:{
@@ -204,8 +208,12 @@ export default {
     update(){
         let component = this;
         this.$store.dispatch('updateUser', [component.user_details,this.$store.state.auth.headers])
-        .then((resp) => toastr.success(resp.data.msg))
-        .catch(err => console.log(err))
+        .then((resp) => {
+            this.success = resp.data.msg
+        })
+        .catch(err => {
+            this.error = err.toString()
+        })
     },
     checkForm: function (e) {
         if (this.user_details.title && this.user_details.first_name && this.user_details.last_name && this.user_details.email && this.user_details.phone) {

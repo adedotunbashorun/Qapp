@@ -22,6 +22,8 @@
         <div class="row">
             <div class="card card-small mb-4 col-md-4" >
                 <form @submit.prevent="checkForm">
+                    <div class="alert alert-success" v-if="success"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ success }}</div>                    
+                    <div class="alert alert-danger" v-if="error"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ error }}</div>
                     <div class="form-group" style="max-width: 30%">
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -72,7 +74,9 @@ export default {
             subject:'',
             description:'',
             category_id:''
-        }
+        },
+        success: '',
+        error: ''
       }
   },
   mounted(){
@@ -91,8 +95,10 @@ export default {
     update(){
         let component = this;
         this.$store.dispatch('updateQuestion', [component.question,this.$store.state.auth.headers])
-        .then((resp) => { this.$router.push('/admin/questions')})
-        .catch(err => console.log(err))
+        .then((resp) => { 
+            this.success = resp.data.msg
+        })
+        .catch(err => this.err = err.toString())
     },
     checkForm: function (e) {
         if (this.question.category_id && this.question.subject && this.question.description) {

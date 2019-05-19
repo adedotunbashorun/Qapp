@@ -24,32 +24,23 @@
                     <tr>
                         <th scope="col" class="border-0">#</th>
                         <th scope="col" class="border-0">User</th>
-                        <th scope="col" class="border-0">Category</th>                        
-                        <th scope="col" class="border-0">Question</th>                                                
-                        <th scope="col" class="border-0">Schedule</th>
-                        <th scope="col" class="border-0">Action </th>
+                        <th scope="col" class="border-0">Total Sent</th>                        
+                        <th scope="col" class="border-0">Total Replied</th>                                                
+                        <th scope="col" class="border-0">Total Unreplied</th>
+                        <th scope="col" class="border-0">Total</th>
+                        <th scope="col" class="border-0">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(schedule, index) in schedules" :key="index">
+                        <tr v-for="(user, index) in users" :key="index" v-if="user.user_type != 'admin'">
                             <td>{{ index + 1}}</td>
-                            <td>{{ schedule.user_id.first_name + ' ' + schedule.user_id.last_name}}</td>
-                            <td>{{schedule.category_id.name}}</td>
-                            <td>{{schedule.question_id.subject}}</td>  
-                            <td><Adedotun :value="schedule.scheduled_date" fn="date" /></td>
-                            <td>
-                                <ul class="navbar-nav border-left flex-row ">
-                                    <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <span class="d-none d-md-inline-block">Action</span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-small">
-                                        <!-- <nuxt-link class="dropdown-item" :to="{name: 'admin-category-id', params:{id : schedule._id}}">
-                                        <i class="material-icons">&#xE7FD;</i>View Schedule</nuxt-link> -->
-                                    </div>
-                                    </li>
-                                </ul>
-                            </td>
+                            <td>{{ user.first_name + ' ' + user.last_name}}</td>
+                            <td>{{ TotalSent(user._id) }}</td>
+                            <td>{{ TotalReplied(user._id) }}</td>  
+                            <td>{{ TotalSent(user._id) - TotalReplied(user._id)}}</td>
+                            <td>{{ Total(user._id)}}</td>
+                            <td><nuxt-link class="btn btn-success" :to="{name: 'admin-users-id', params:{id : user._id}}">
+                                <i class="material-icons">&#xE7FD;</i>View User</nuxt-link></td>
                         </tr>
                     </tbody>
                 </table>
@@ -62,9 +53,15 @@
     </div>
 </template>
 <script>
+import {Api} from '../../../api'
 import Adedotun from '../../Extra/adedotun'
 export default {
-    props:['schedules'],
+    props:['users'],
+    data(){
+        return {
+            count: 0
+        }
+    },
     mounted(){
         setTimeout(() => {
             $('#schedule-table').DataTable({})
@@ -72,6 +69,29 @@ export default {
     },
     components:{
         Adedotun
+    },
+    methods:{
+        Total(data){
+            Api.Schedule.userSchedulesTotal(data,this.$store.state.auth.headers).then(resp =>{                
+                return this.count
+            }).catch(err =>{
+                // return ''
+            })
+        },
+        TotalSent(data){
+            Api.Schedule.userSchedulesSent(data,this.$store.state.auth.headers).then((resp) =>{
+                return resp.data.count
+            }).catch(err =>{
+                return ''
+            })
+        },
+        TotalReplied(data){
+            Api.Schedule.userSchedulesReplied(data,this.$store.state.auth.headers).then((resp) =>{
+                return resp.data.count
+            }).catch(err =>{
+                return ''
+            })
+        }
     }
 }
 </script>

@@ -23,6 +23,8 @@
             <div class="col">
                 <strong class="text-muted d-block mb-2"></strong>
                 <form @submit.prevent="checkForm">
+                    <div class="alert alert-success" v-if="success"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ success }}</div>                    
+                    <div class="alert alert-danger" v-if="error"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ error }}</div>
                     <div class="form-group" style="max-width: 30%">
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -74,7 +76,9 @@ export default {
                 category_id: '',
                 subject:'',
                 description:''
-            }
+            },
+            success:'',
+            error: ''
         }
     },
     methods: {
@@ -82,10 +86,12 @@ export default {
             let component = this;
             this.$store.dispatch('addQuestion', [component.question,this.$store.state.auth.headers])
             .then((resp) => { 
-                // toastr.success(resp.data.msg)
-                this.$router.push('/admin/questions')
+                this.success = resp.data.msg
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                this.error = err.toString()
+                console.log(err)
+            })
         },
         checkForm: function (e) {
             if (this.question.category_id && this.question.subject && this.question.description) {
