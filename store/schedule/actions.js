@@ -12,7 +12,11 @@ import {
   ALL_USER_SCHEDULES_FAILURE,
   ALL_RESPONSES,
   ALL_RESPONSES_SUCCESS,
-  ALL_RESPONSES_FAILURE
+  ALL_RESPONSES_FAILURE,
+  TOTAL,
+  TOTAL_REPLIED,
+  TOTAL_SENT,
+  ERROR_MSG
 } from './mutation-types'
 
 export const actions = {
@@ -24,6 +28,45 @@ export const actions = {
         resolve(response)
       }).catch(err => {
         commit(ALL_SCHEDULES_FAILURE, err)
+        reject(err)
+      })
+    })
+  },
+
+  allUserSchedules({ commit }, [payload,header]) {
+    // commit(ALL_SCHEDULES)
+    return new Promise((resolve, reject) => {
+      Api.Schedule.userSchedules(payload,header).then(response => {
+        commit(TOTAL, response.data)
+        resolve(response)
+      }).catch(err => {
+        commit(ERROR_MSG, err)
+        reject(err)
+      })
+    })
+  },
+
+  allUserSentSchedules({ commit }, [payload,header]) {
+    // commit(ALL_SCHEDULES)
+    return new Promise((resolve, reject) => {
+      Api.Schedule.userSchedulesSent(payload, header).then(response => {
+        commit(TOTAL_SENT, response.data)
+        resolve(response)
+      }).catch(err => {
+        commit(ERROR_MSG, err)
+        reject(err)
+      })
+    })
+  },
+
+  allUserRepliedSchedules({ commit }, [payload,header]) {
+    // commit(ALL_SCHEDULES)
+    return new Promise((resolve, reject) => {
+      Api.Schedule.userSchedulesReplied(payload, header).then(response => {
+        commit(TOTAL_REPLIED, response.data)
+        resolve(response)
+      }).catch(err => {
+        commit(ERROR_MSG, err)
         reject(err)
       })
     })

@@ -48,36 +48,18 @@
                 <span><strong>Questions</strong></span>
             </nuxt-link>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
             <nuxt-link class="nav-link " :to="{name: 'admin-schedules'}">
                 <i class="material-icons">schedule</i>
                 <span><strong>Schedules</strong></span>
             </nuxt-link>
-            </li>
+            </li> -->
             <li class="nav-item">
             <nuxt-link class="nav-link " :to="{name: 'admin-response'}">
                 <i class="material-icons">reply</i>
                 <span><strong>Response</strong></span>
             </nuxt-link>
             </li>
-            <!-- <li class="nav-item">
-            <a class="nav-link " href="data.html">
-                <i class="material-icons">save</i>
-                <span><strong>Data</strong></span>
-            </a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link " href="#">
-                <i class="material-icons">place</i>
-                <span><strong>Tracks</strong></span>
-            </a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link " href="billing.html">
-                <i class="material-icons">money</i>
-                <span><strong>Billing</strong></span>
-            </a>
-            </li> -->
             <li class="nav-item">
             <a class="nav-link " @click="logoutUser">
                 <i class="material-icons">logout</i>

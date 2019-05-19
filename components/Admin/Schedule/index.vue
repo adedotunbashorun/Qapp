@@ -57,11 +57,6 @@ import {Api} from '../../../api'
 import Adedotun from '../../Extra/adedotun'
 export default {
     props:['users'],
-    data(){
-        return {
-            count: 0
-        }
-    },
     mounted(){
         setTimeout(() => {
             $('#schedule-table').DataTable({})
@@ -72,8 +67,11 @@ export default {
     },
     methods:{
         Total(data){
-            Api.Schedule.userSchedulesTotal(data,this.$store.state.auth.headers).then(resp =>{                
-                return this.count
+            // return 0
+            Api.Schedule.userSchedulesTotal(data,this.$store.state.auth.headers).then(resp =>{  
+                console.log(resp.data.count) 
+                // alert(resp.data.count)             
+                return resp.data.count
             }).catch(err =>{
                 // return ''
             })

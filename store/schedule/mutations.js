@@ -11,11 +11,23 @@ import {
   ALL_USER_SCHEDULES_FAILURE,
   ALL_RESPONSES,
   ALL_RESPONSES_SUCCESS,
-  ALL_RESPONSES_FAILURE
+  ALL_RESPONSES_FAILURE,
+  TOTAL,
+  TOTAL_REPLIED,
+  TOTAL_SENT
 } from './mutation-types'
 
 export const mutations = {
   
+  [TOTAL](state) {
+    state.showLoader = false
+  },
+  [TOTAL_REPLIED](state) {
+    state.showLoader = false
+  },
+  [TOTAL_SENT](state) {
+    state.showLoader = false
+  },
   [ALL_SCHEDULES] (state) {
     state.showLoader = true
   },
