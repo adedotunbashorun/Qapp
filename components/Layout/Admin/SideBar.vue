@@ -48,12 +48,12 @@
                 <span><strong>Questions</strong></span>
             </nuxt-link>
             </li>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
             <nuxt-link class="nav-link " :to="{name: 'admin-schedules'}">
                 <i class="material-icons">schedule</i>
                 <span><strong>Schedules</strong></span>
             </nuxt-link>
-            </li> -->
+            </li>
             <li class="nav-item">
             <nuxt-link class="nav-link " :to="{name: 'admin-response'}">
                 <i class="material-icons">reply</i>

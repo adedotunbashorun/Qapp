@@ -1,5 +1,5 @@
 <template>
-    <Schedule :users="users"/>
+    <Schedule :schedules="schedules"/>
 </template>
 <script>
 import Schedule from '~/components/Admin/Schedule/index.vue'
@@ -11,17 +11,17 @@ export default {
     data(){
         return {
             errors: [],
-            users: []
+            schedules: []
         }
     },
     mounted(){
-        this.allUsers()
+        this.allSchedules()
     },
     methods:{
-        allUsers(){
-            this.$store.dispatch('allUsers', this.$store.state.auth.headers)
+        allSchedules(){
+            this.$store.dispatch('allSchedules', this.$store.state.auth.headers)
             .then((resp) => {
-                this.users = resp.data.users
+                this.schedules = resp.data.schedules
             }).catch(err => console.log())
         }
     }

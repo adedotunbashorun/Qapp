@@ -1,0 +1,95 @@
+// <template>
+//     <div class="main-content-container container-fluid px-4">
+            
+//         <!-- Page Header -->
+//         <div class="page-header row no-gutters py-4">
+//             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+//             <h3 class="page-title">Schedule Management</h3>
+//             <span class="text-uppercase page-subtitle">Add, rename and manage</span>
+//             </div>
+//         </div>
+//         <!-- End Page Header -->
+                    
+
+//         <!-- Default Light Table -->
+//         <div class="row">
+//             <div class="col">
+//             <div class="card card-small mb-4">
+//                 <div class="card-header border-bottom">
+//                 <h6 class="m-0">Schedule Listing</h6>
+//                 </div>
+//                 <div class="card-body p-0 pb-3 text-center">
+//                 <table id="schedule-table" class="table mb-0" style="margin:20px;">
+//                     <thead class="bg-light">
+//                     <tr>
+//                         <th scope="col" class="border-0">#</th>
+//                         <th scope="col" class="border-0">User</th>
+//                         <th scope="col" class="border-0">Total Sent</th>                        
+//                         <th scope="col" class="border-0">Total Replied</th>                                                
+//                         <th scope="col" class="border-0">Total Unreplied</th>
+//                         <th scope="col" class="border-0">Total</th>
+//                         <th scope="col" class="border-0">Action</th>
+//                     </tr>
+//                     </thead>
+//                     <tbody>
+//                         <tr v-for="(user, index) in users" :key="index" v-if="user.user_type != 'admin'">
+//                             <td>{{ index + 1}}</td>
+//                             <td>{{ user.first_name + ' ' + user.last_name}}</td>
+//                             <td>{{ TotalSent(user._id) }}</td>
+//                             <td>{{ TotalReplied(user._id) }}</td>  
+//                             <td>{{ TotalSent(user._id) - TotalReplied(user._id)}}</td>
+//                             <td>{{ Total(user._id)}}</td>
+//                             <td><nuxt-link class="btn btn-success" :to="{name: 'admin-users-id', params:{id : user._id}}">
+//                                 <i class="material-icons">&#xE7FD;</i>View User</nuxt-link></td>
+//                         </tr>
+//                     </tbody>
+//                 </table>
+//                 </div>
+//             </div>
+//             </div>
+//         </div>
+//         <!-- End Default Light Table -->
+
+//     </div>
+// </template>
+// <script>
+// import {Api} from '../../../api'
+// import Adedotun from '../../Extra/adedotun'
+// export default {
+//     props:['users'],
+//     mounted(){
+//         setTimeout(() => {
+//             $('#schedule-table').DataTable({})
+//         },2000)
+//     },
+//     components:{
+//         Adedotun
+//     },
+//     methods:{
+//         Total(data){
+//             // return 0
+//             Api.Schedule.userSchedulesTotal(data,this.$store.state.auth.headers).then(resp =>{  
+//                 console.log(resp.data.count) 
+//                 // alert(resp.data.count)             
+//                 return resp.data.count
+//             }).catch(err =>{
+//                 // return ''
+//             })
+//         },
+//         TotalSent(data){
+//             Api.Schedule.userSchedulesSent(data,this.$store.state.auth.headers).then((resp) =>{
+//                 return resp.data.count
+//             }).catch(err =>{
+//                 return ''
+//             })
+//         },
+//         TotalReplied(data){
+//             Api.Schedule.userSchedulesReplied(data,this.$store.state.auth.headers).then((resp) =>{
+//                 return resp.data.count
+//             }).catch(err =>{
+//                 return ''
+//             })
+//         }
+//     }
+// }
+// </script>
