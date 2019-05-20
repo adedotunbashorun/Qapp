@@ -211,7 +211,8 @@ export default {
         let component = this;
         this.$store.dispatch('updateUser', [component.user_details,this.$store.state.auth.headers])
         .then((resp) => {
-            this.success = resp.data.msg
+            this.success = resp.data.msg            
+            this.errors = []
         })
         .catch(err => {
             this.error = err.toString()

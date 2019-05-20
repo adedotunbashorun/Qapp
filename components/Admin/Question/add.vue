@@ -23,6 +23,12 @@
             <div class="col">
                 <strong class="text-muted d-block mb-2"></strong>
                 <form @submit.prevent="checkForm">
+                    <p v-if="errors.length">
+                        <b>Please correct the following error(s):</b>
+                        <ul>
+                        <li class="text-danger" v-for="error in errors" :key="error">{{ error }}</li>
+                        </ul>
+                    </p>
                     <div class="alert alert-success" v-if="success"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ success }}</div>                    
                     <div class="alert alert-danger" v-if="error"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ error }}</div>
                     <div class="form-group" style="max-width: 30%">
@@ -87,6 +93,12 @@ export default {
             this.$store.dispatch('addQuestion', [component.question,this.$store.state.auth.headers])
             .then((resp) => { 
                 this.success = resp.data.msg
+                this.question= {
+                    category_id: '',
+                    subject:'',
+                    description:''
+                }                
+                this.errors = []
             })
             .catch(err => {
                 this.error = err.toString()

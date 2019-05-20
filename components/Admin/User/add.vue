@@ -131,6 +131,17 @@ export default {
             this.$store.dispatch('addUser', [component.user,this.$store.state.auth.headers])
             .then((resp) => {
                 this.success = resp.data.msg
+                this.user= {
+                    title:'',
+                    medium:'',
+                    user_type:'',
+                    first_name:'',
+                    last_name:'',
+                    email:'',
+                    phone:'',
+                    password:''
+                }                
+                this.errors = []
             })
             .catch(err => {
                 console.log(err)
