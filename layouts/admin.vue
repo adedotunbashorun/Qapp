@@ -48,7 +48,8 @@ export default {
                 { src: '/scripts/app/app-blog-overview.1.1.0.js' },
                 { src: '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'},
                 { src: '/scripts/toastr/toastr.init.js' },
-                { src: '/scripts/toastr/toastr.min.js' }
+                { src: '/scripts/toastr/toastr.min.js' },
+                //{ src: 'https://apis.google.com/js/client.js'}
             ]
         }
     },
