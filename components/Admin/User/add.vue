@@ -80,7 +80,7 @@
                         <input type="text" class="form-control" v-model="user.last_name" placeholder="Last Name" aria-label="Full name" aria-describedby="basic-addon1"> </div>
                     </div>
                     <div class="form-group" style="max-width: 30%">
-                        <input type="text" v-model="user.phone" pattern="[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{4}" class="form-control" placeholder="Phone Number" value="" required> 
+                        <input type="text" v-model="user.phone" class="form-control" placeholder="Phone Number" value="" required> 
                         <span class="note">Format: 2349034268873</span>
                     </div>
                     
@@ -145,12 +145,16 @@ export default {
             })
             .catch(err => {
                 console.log(err)
-                this.error = err.toString()
+                this.error = 'please verify that the data entered are correct.'
             })
         },
         checkForm: function (e) {
             if (this.user.title && this.user.first_name && this.user.last_name && this.user.email && this.user.phone && this.user.password) {
-            this.register();
+                if (!this.validEmail(this.user.email)) {
+                    this.errors.push('Valid email required.');
+                    return false;
+                }
+                this.register();
             return true;
             }
 
@@ -174,7 +178,8 @@ export default {
             if (!this.user.email) {
             this.errors.push('Email required.');
             return false;
-            }else if (!this.validEmail(this.user.email)) {
+            }
+            if (!this.validEmail(this.user.email)) {
             this.errors.push('Valid email required.');
             return false;
             }

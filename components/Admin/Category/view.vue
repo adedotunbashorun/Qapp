@@ -135,7 +135,7 @@ export default {
             this.errors = []
         })
         .catch(err => {
-            this.error = err.toString()
+            this.error = 'please verify that the data entered are correct.'
             console.log(err)
         })
     },

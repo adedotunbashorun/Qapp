@@ -105,7 +105,7 @@ export default {
             this.success = resp.data.msg
             this.errors = []
         })
-        .catch(err => this.err = err.toString())
+        .catch(err => this.error = 'please verify that the data entered are correct.')
     },
     checkForm: function (e) {
         if (this.question.category_id && this.question.subject && this.question.description) {

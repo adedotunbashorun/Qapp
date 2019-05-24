@@ -8,7 +8,7 @@
             <p v-if="errors.length">
                 <b>Please correct the following error(s):</b>
                 <ul>
-                  <li class="text-danger" v-for="error in errors" :key="error">{{ error }}</li>
+                  <li class="text-danger" v-for="error in errors" :key="error">{{ error.message }}</li>
                 </ul>
               </p>
             <form class="form-signin" @submit.prevent="checkForm">
