@@ -61,7 +61,7 @@
             </nuxt-link>
             </li>
             <li class="nav-item">
-            <a class="nav-link " @click="logoutUser">
+            <a class="nav-link" style="cursor:pointer;" @click="logoutUser">
                 <i class="material-icons">logout</i>
                 <span><strong>Logout</strong></span>
             </a>
