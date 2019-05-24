@@ -21,7 +21,7 @@
                 <a class="dropdown-item" href="#">
                     <i class="material-icons">&#xE7FD;</i> Profile</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-danger" href="#">
+                <a class="dropdown-item text-danger" @click="logoutUser">
                     <i class="material-icons text-danger">&#xE879;</i> Logout </a>
                 </div>
             </li>
@@ -35,7 +35,30 @@
     </div>
 </template>
 <script>
-export default {
-  props: ['user']
+const Cookie = process.client ? require('js-cookie') : undefined
+export default { 
+    props: ['user'],
+    methods:{
+        logoutUser() {
+          let component = this;
+          this.$store.dispatch('logout',this.$store.state.auth.headers)
+          .then(() => {
+            Cookie.remove('jwtToken')
+            Cookie.remove('user')
+            const token = null
+            const user = null
+            this.$store.commit('LOGIN_SUCCESS', {token, user})
+            this.$router.go('/')
+          })
+          .catch(err => {
+            Cookie.remove('jwtToken')
+            Cookie.remove('user')
+            const token = null
+            const user = null
+            this.$store.commit('LOGIN_SUCCESS', {token, user})
+            this.$router.go('/')
+          })
+      },
+    }
 }
 </script>

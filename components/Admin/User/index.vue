@@ -55,10 +55,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-small">
                                 <nuxt-link class="dropdown-item" :to="{name: 'admin-users-id', params:{id : user._id}}">
-                                <i class="material-icons">&#xE7FD;</i>Edit User</nuxt-link>
+                                <i class="material-icons">edit</i>Edit User</nuxt-link>
                                 <div class="dropdown-divider"></div>
                                 <a v-if="user.user_type !== 'admin'" class="dropdown-item text-danger" @click="deleteUser(user._id)">
-                                <i class="material-icons text-danger">&#xE879;</i> Delete User </a>
+                                <i class="material-icons text-danger">delete</i> Delete User </a>
                             </div>
                             </li>
                         </ul>

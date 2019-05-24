@@ -51,10 +51,10 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-small">
                                         <nuxt-link class="dropdown-item" :to="{name: 'admin-questions-id', params:{id : question._id}}">
-                                        <i class="material-icons">&#xE7FD;</i>Edit Question</nuxt-link>
+                                        <i class="material-icons">edit</i>Edit Question</nuxt-link>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item text-danger" @click="deleteQuestion(question._id)">
-                                        <i class="material-icons text-danger">&#xE879;</i> Delete Question </a>
+                                        <i class="material-icons text-danger">delete</i> Delete Question </a>
                                     </div>
                                     </li>
                                 </ul>

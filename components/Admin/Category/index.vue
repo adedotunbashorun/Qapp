@@ -49,10 +49,10 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-small">
                                         <nuxt-link class="dropdown-item" :to="{name: 'admin-category-id', params:{id : category._id}}">
-                                        <i class="material-icons">&#xE7FD;</i>Edit Category</nuxt-link>
+                                        <i class="material-icons">edit</i>Edit Category</nuxt-link>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item text-danger" @click="deleteCategory(category._id)">
-                                        <i class="material-icons text-danger">&#xE879;</i> Delete Category </a>
+                                        <i class="material-icons text-danger">delete</i> Delete Category </a>
                                     </div>
                                     </li>
                                 </ul>

@@ -25,7 +25,7 @@
                         <th scope="col" class="border-0">#</th>
                         <th scope="col" class="border-0">User</th>                       
                         <th scope="col" class="border-0">Question</th>
-                        <th scope="col" class="border-0">Phone</th>                                                
+                        <th scope="col" class="border-0">From</th>                                                
                         <th scope="col" class="border-0">Response</th>
                         <th scope="col" class="border-0"></th>
                     </tr>
