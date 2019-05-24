@@ -18,10 +18,7 @@
                 <span class="d-none d-md-inline-block">{{ user.first_name + ' ' + user.last_name}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                <a class="dropdown-item" href="#">
-                    <i class="material-icons">&#xE7FD;</i> Profile</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item text-danger" style="cursor:pointer;" @click="logoutUser">
+                <a class="dropdown-item text-danger" style="cursor:pointer" @click="logoutUser">
                     <i class="material-icons text-danger">&#xE879;</i> Logout </a>
                 </div>
             </li>
