@@ -80,7 +80,7 @@
                         <input type="text" class="form-control" v-model="user.last_name" placeholder="Last Name" aria-label="Full name" aria-describedby="basic-addon1"> </div>
                     </div>
                     <div class="form-group" style="max-width: 30%">
-                        <input type="text" v-model="user.phone" class="form-control" placeholder="Phone Number" value="" required> 
+                        <input type="text" v-model="user.phone" pattern="[0-9]{6,14}[0-9]$" class="form-control" placeholder="Phone Number" value="" required> 
                         <span class="note">Format: 2349034268873</span>
                     </div>
                     
