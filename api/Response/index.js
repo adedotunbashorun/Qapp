@@ -13,8 +13,21 @@ const allResponse = (header) => {
     })
 }
 
+const allArchieve = (header) => {
+    return new Promise((resolve, reject) => {
+        axios.get(config.apiUrl + '/api/archieves', { headers: { Authorization: header } })
+            .then(resp => {
+                resolve(resp)
+            })
+            .catch(err => {
+                reject(err)
+            })
+    })
+}
+
 
 
 export const Response = {
     allResponse,
+    allArchieve
 }

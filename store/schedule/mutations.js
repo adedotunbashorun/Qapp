@@ -12,6 +12,9 @@ import {
   ALL_RESPONSES,
   ALL_RESPONSES_SUCCESS,
   ALL_RESPONSES_FAILURE,
+  ALL_ARCHIEVE,
+  ALL_ARCHIEVE_SUCCESS,
+  ALL_ARCHIEVE_FAILURE,
   TOTAL,
   TOTAL_REPLIED,
   TOTAL_SENT
@@ -52,6 +55,19 @@ export const mutations = {
     state.showLoader = false
     state.error = payload
     state.responses = []
+  },
+
+  [ALL_ARCHIEVE](state) {
+    state.showLoader = true
+  },
+  [ALL_ARCHIEVE_SUCCESS](state, payload) {
+    state.showLoader = false
+    state.archieves = payload.archieves
+  },
+  [ALL_ARCHIEVE_FAILURE](state, payload) {
+    state.showLoader = false
+    state.error = payload
+    state.archieves = []
   },
 
   [ALL_USER_SCHEDULES](state) {

@@ -8,6 +8,7 @@ export default {
   state: {
     schedules: [],
     responses: [],
+    archieves: [],
     error: '',
     schedule: {},
     showLoader: false,

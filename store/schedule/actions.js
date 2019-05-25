@@ -13,6 +13,9 @@ import {
   ALL_RESPONSES,
   ALL_RESPONSES_SUCCESS,
   ALL_RESPONSES_FAILURE,
+  ALL_ARCHIEVE,
+  ALL_ARCHIEVE_SUCCESS,
+  ALL_ARCHIEVE_FAILURE,
   TOTAL,
   TOTAL_REPLIED,
   TOTAL_SENT,
@@ -80,6 +83,19 @@ export const actions = {
         resolve(response)
       }).catch(err => {
         commit(ALL_RESPONSES_FAILURE, err)
+        reject(err)
+      })
+    })
+  },
+
+  allArchieve({ commit }, header) {
+    commit(ALL_ARCHIEVE)
+    return new Promise((resolve, reject) => {
+      Api.Response.allResponse(header).then(response => {
+        commit(ALL_ARCHIEVE_SUCCESS, response.data)
+        resolve(response)
+      }).catch(err => {
+        commit(ALL_ARCHIEVE_FAILURE, err)
         reject(err)
       })
     })

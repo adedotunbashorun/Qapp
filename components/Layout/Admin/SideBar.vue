@@ -61,6 +61,12 @@
             </nuxt-link>
             </li>
             <li class="nav-item">
+            <nuxt-link class="nav-link " :to="{name: 'admin-archieves'}">
+                <i class="material-icons">list</i>
+                <span><strong>Archieve</strong></span>
+            </nuxt-link>
+            </li>
+            <li class="nav-item">
             <a class="nav-link" style="cursor:pointer;" @click="logoutUser">
                 <i class="material-icons">logout</i>
                 <span><strong>Logout</strong></span>

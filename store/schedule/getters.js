@@ -6,6 +6,13 @@ export const getters = {
   Schedule: (state) => {
     return state.schedule
   },
+  Archieves: (state) => {
+    return state.archieves
+  },
+
+  Responses: (state) => {
+    return state.responses
+  },
 
 }
 

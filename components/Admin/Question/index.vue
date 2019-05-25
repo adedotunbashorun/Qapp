@@ -44,20 +44,20 @@
                             <td>{{ question.subject}}</td>
                             <td>{{question.description}}</td>
                             <td>
-                                <ul class="navbar-nav border-left flex-row ">
+                                <!-- <ul class="navbar-nav border-left flex-row ">
                                     <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                         <span class="d-none d-md-inline-block">Action</span>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-small">
-                                        <nuxt-link class="dropdown-item" :to="{name: 'admin-questions-id', params:{id : question._id}}">
-                                        <i class="material-icons">edit</i>Edit Question</nuxt-link>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-danger" @click="deleteQuestion(question._id)">
-                                        <i class="material-icons text-danger">delete</i> Delete Question </a>
-                                    </div>
+                                    <div class="dropdown-menu dropdown-menu-small"> -->
+                                        <nuxt-link class="" :to="{name: 'admin-questions-id', params:{id : question._id}}" title="edit / view">
+                                        <i class="material-icons">edit</i></nuxt-link>
+                                        <!-- <div class="dropdown-divider"></div> -->
+                                        <a class="text-danger" style="cursor:pointer;" @click="deleteQuestion(question._id)" title="delete">
+                                        <i class="material-icons text-danger">delete</i></a>
+                                    <!-- </div>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </td>
                         </tr>
                     </tbody>

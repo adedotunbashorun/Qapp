@@ -48,20 +48,20 @@
                         <td>{{ user.user_type }}</td>
                         <td style="color: #3ED60E">{{ user.is_scheduled }}</td>
                         <td> 
-                        <ul class="navbar-nav border-left flex-row ">
+                        <!-- <ul class="navbar-nav border-left flex-row ">
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-none d-md-inline-block">Action</span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-small">
-                                <nuxt-link class="dropdown-item" :to="{name: 'admin-users-id', params:{id : user._id}}">
-                                <i class="material-icons">edit</i>Edit User</nuxt-link>
-                                <div class="dropdown-divider"></div>
-                                <a v-if="user.user_type !== 'admin'" class="dropdown-item text-danger" @click="deleteUser(user._id)">
-                                <i class="material-icons text-danger">delete</i> Delete User </a>
-                            </div>
+                            <div class="dropdown-menu dropdown-menu-small"> -->
+                                <nuxt-link class="" :to="{name: 'admin-users-id', params:{id : user._id}}" title="edit / view">
+                                <i class="material-icons">edit</i></nuxt-link>
+                                <!-- <div class="dropdown-divider"></div> -->
+                                <a v-if="user.user_type !== 'admin'" class="text-danger" style="cursor:pointer;" @click="deleteUser(user._id)" title="delete">
+                                <i class="material-icons text-danger">delete</i></a>
+                            <!-- </div>
                             </li>
-                        </ul>
+                        </ul> -->
                         </td>
                     </tr>
                     </tbody>

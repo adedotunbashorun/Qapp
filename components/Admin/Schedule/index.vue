@@ -38,17 +38,17 @@
                             <td>{{schedule.question_id.subject}}</td>  
                             <td><Adedotun :value="schedule.scheduled_date" fn="date" /></td>
                             <td>
-                                <ul class="navbar-nav border-left flex-row ">
+                                <!-- <ul class="navbar-nav border-left flex-row ">
                                     <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                         <span class="d-none d-md-inline-block">Action</span>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-small">
-                                        <nuxt-link class="dropdown-item" :to="{name: 'admin-users-id', params:{id : schedule.user_id._id}}">
-                                        <i class="material-icons">&#xE7FD;</i>View Schedule</nuxt-link>
-                                    </div>
+                                    <div class="dropdown-menu dropdown-menu-small"> -->
+                                    <nuxt-link class="" :to="{name: 'admin-users-id', params:{id : schedule.user_id._id}}" title="view">
+                                        <i class="material-icons">&#xE7FD;</i></nuxt-link>
+                                    <!-- </div>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </td>
                         </tr>
                     </tbody>
