@@ -15,8 +15,15 @@ export default {
         }
     },
     mounted(){
-        this.archieves = this.$store.getters.Archieves
-        // this.allSchedules()
+        this.allArchieves()
+    },
+    methods:{
+      allArchieves(){
+            this.$store.dispatch('allArchieve', this.$store.state.auth.headers)
+            .then((resp) => {
+                this.archieves = resp.data.archieves
+            }).catch(err => console.log())
+        }
     }
 }
 </script>

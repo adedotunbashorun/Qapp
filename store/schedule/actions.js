@@ -91,7 +91,7 @@ export const actions = {
   allArchieve({ commit }, header) {
     commit(ALL_ARCHIEVE)
     return new Promise((resolve, reject) => {
-      Api.Response.allResponse(header).then(response => {
+      Api.Response.allArchieve(header).then(response => {
         commit(ALL_ARCHIEVE_SUCCESS, response.data)
         resolve(response)
       }).catch(err => {
@@ -111,7 +111,7 @@ export const actions = {
         commit(SCHEDULE_BY_ID_FAILURE, err)
         reject(err)
       })
-    })    
+    })
   },
 
   userSchedules ({commit}, [payload,header]) {
@@ -119,7 +119,7 @@ export const actions = {
     return new Promise((resolve, reject) => {
       Api.Schedule.userSchedules(payload,header).then(response => {
         commit(ALL_USER_SCHEDULES_SUCCESS, response.data)
-        resolve(response)      
+        resolve(response)
       }).catch(err => {
         commit(ALL_USER_SCHEDULES_FAILURE, err)
         reject(err)
@@ -127,7 +127,17 @@ export const actions = {
     })
   },
 
-  
+  allCounts({ commit },header) {
+    return new Promise((resolve, reject) => {
+      Api.Response.allCount(header).then( response => {
+        resolve(response)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+
+
 }
 
 

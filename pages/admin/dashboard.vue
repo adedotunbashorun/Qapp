@@ -1,5 +1,5 @@
 <template>
-    <Dashboard :user="user"/>
+    <Dashboard :user="user" :result="result" />
 </template>
 <script>
 import Dashboard from '~/components/Admin/dashboard.vue'
@@ -9,21 +9,24 @@ export default {
     components:{
         Dashboard
     },
+    data(){
+      return{
+        result:{}
+      }
+    },
     mounted(){
-        console.log(this.$store.state.auth)
+      this.getCount()
     },
     computed:{
-        user(){            
+        user(){
             return this.$store.getters.authUser
-        }        
+        }
     },
     methods:{
-        getUser(){
-            this.$store.dispatch('userById', [this.$store.getters.authUser._id,this.$store.state.auth.headers])
+        getCount(){
+            this.$store.dispatch('allCounts', this.$store.state.auth.headers)
             .then((resp) => {
-                    if (resp.data.user.temporarytoken == '') {
-                        return redirect('/')
-                    }
+              this.result = resp.data.result
             }).catch(err => console.log())
         }
     }
