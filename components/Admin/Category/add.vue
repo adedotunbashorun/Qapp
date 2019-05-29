@@ -1,5 +1,5 @@
 <template>
-    <div class="main-content-container container-fluid px-4">            
+    <div class="main-content-container container-fluid px-4">
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -16,7 +16,7 @@
             <button type="button" class="mb-2 btn btn-outline-primary mr-2">Go back</button></nuxt-link>
         </div>
         </div>
-        <!-- / Button -->            
+        <!-- / Button -->
 
         <!-- Form -->
         <div class="row">
@@ -29,7 +29,7 @@
                         <li class="text-danger" v-for="error in errors" :key="error">{{ error }}</li>
                         </ul>
                     </p>
-                    <div class="alert alert-success" v-if="success"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ success }}</div>                    
+                    <div class="alert alert-success" v-if="success"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ success }}</div>
                     <div class="alert alert-danger" v-if="error"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ error }}</div>
                     <div class="form-group" style="max-width: 30%">
                         <div class="input-group mb-3">
@@ -42,7 +42,7 @@
                         <div class="input-group mb-3">
                         <div class="input-group-prepend">
                         </div>
-                        <textarea type="text" class="form-control" v-model="category.description" rows="4" aria-describedby="basic-addon1"> 
+                        <textarea type="text" class="form-control" v-model="category.description" rows="4" aria-describedby="basic-addon1">
                         </textarea>
                         </div>
                     </div>
@@ -57,8 +57,8 @@
         <!-- End Form -->
 
         <!-- Button -->
-        
-        <!-- / Button --> 
+
+        <!-- / Button -->
     </div>
 
 </template>
@@ -69,7 +69,7 @@ export default {
             errors: [],
             category: {
                 name:'',
-                description:''                
+                description:''
             },
             success: '',
             error: ''
@@ -80,13 +80,19 @@ export default {
             let component = this;
             this.$store.dispatch('addCategory', [component.category,this.$store.state.auth.headers])
             .then((resp) => {
+               this.error = ''
                 this.success = ''
-                this.success = resp.data.msg
-                this.category= {
-                    name:'',
-                    description:''                
+                if(resp.data.error){
+                  this.error = resp.data.msg
+                }else{
+                  this.success = ''
+                  this.success = resp.data.msg
+                  this.category= {
+                      name:'',
+                      description:''
+                  }
+                  this.errors = []
                 }
-                this.errors = []
             })
             .catch(err => {
                 this.error = ''

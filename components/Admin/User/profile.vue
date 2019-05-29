@@ -1,5 +1,5 @@
 <template>
-    <div class="main-content-container container-fluid px-4">            
+    <div class="main-content-container container-fluid px-4">
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -16,7 +16,7 @@
                 <button type="button" class="mb-2 btn btn-outline-primary mr-2">Go back</button></nuxt-link>
             </div>
         </div>
-        <!-- / Button -->            
+        <!-- / Button -->
 
         <!-- Form -->
         <div class="row">
@@ -70,15 +70,15 @@
                                 <input type="text" class="form-control" v-model="user_details.last_name" placeholder="Last Name" aria-label="Full name" aria-describedby="basic-addon1"> </div>
                             </div>
                             <div class="form-group" style="max-width: 100%">
-                                <input type="text" v-model="user_details.phone" class="form-control" placeholder="Phone Number" value=""> 
+                                <input type="text" v-model="user_details.phone" class="form-control" placeholder="Phone Number" value="">
                             </div>
-                            
+
                             <div class="form-group" style="max-width: 100%">
-                                <input type="text" v-model="user_details.email" class="form-control" id="inputAddress" placeholder="Email" value=""> 
-                            </div> 
+                                <input type="text" v-model="user_details.email" class="form-control" id="inputAddress" placeholder="Email" value="">
+                            </div>
                             <div class="form-group" style="max-width: 100%">
                                 <button type="submit" class="mb-2 btn btn-primary mr-2">Update User</button>
-                            </div>               
+                            </div>
                         </div>
                     </div>
                     <!-- End Form -->
@@ -184,9 +184,9 @@ export default {
         this.userSchedule()
         setTimeout(() => {
             $('#activity-table').DataTable({})
-            $('#schedule-table').DataTable({})      
-        },2000)     
-            
+            $('#schedule-table').DataTable({})
+        },2000)
+
   },
   methods: {
     getUser(){
@@ -211,8 +211,14 @@ export default {
         let component = this;
         this.$store.dispatch('updateUser', [component.user_details,this.$store.state.auth.headers])
         .then((resp) => {
-            this.success = resp.data.msg            
+          this.error = ''
+          this.success = ''
+          if(resp.data.error){
+            this.error = resp.data.msg
+          }else{
+            this.success = resp.data.msg
             this.errors = []
+          }
         })
         .catch(err => {
             this.error = 'please verify that the data entered are correct.'

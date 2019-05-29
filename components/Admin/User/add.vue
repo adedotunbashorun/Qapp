@@ -1,5 +1,5 @@
 <template>
-    <div class="main-content-container container-fluid px-4">            
+    <div class="main-content-container container-fluid px-4">
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -16,10 +16,10 @@
             <button type="button" class="mb-2 btn btn-outline-primary mr-2">Go back</button></nuxt-link>
         </div>
         </div>
-        <!-- / Button -->            
+        <!-- / Button -->
 
         <!-- Form -->
-        
+
         <form @submit.prevent="checkForm">
             <div class="row">
                 <div class="col">
@@ -30,7 +30,7 @@
                         <li class="text-danger" v-for="error in errors" :key="error">{{ error }}</li>
                         </ul>
                     </p>
-                    <div class="alert alert-success" v-if="success"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ success }}</div>                    
+                    <div class="alert alert-success" v-if="success"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ success }}</div>
                     <div class="alert alert-danger" v-if="error"><button type="button" class="pi-close" data-dismiss="alert"><i class="material-icons" data-dismiss="alert">close</i></button>{{ error }}</div>
                     <div class="form-group" style="max-width: 30%">
                         <div class="input-group mb-3">
@@ -80,17 +80,17 @@
                         <input type="text" class="form-control" v-model="user.last_name" placeholder="Last Name" aria-label="Full name" aria-describedby="basic-addon1"> </div>
                     </div>
                     <div class="form-group" style="max-width: 30%">
-                        <input type="text" v-model="user.phone" pattern="[0-9]{6,14}[0-9]$" class="form-control" placeholder="Phone Number" value="" required> 
+                        <input type="text" v-model="user.phone" pattern="[0-9]{6,14}[0-9]$" class="form-control" placeholder="Phone Number" value="" required>
                         <span class="note">Format: 2349034268873</span>
                     </div>
-                    
+
                     <div class="form-group" style="max-width: 30%">
-                        <input type="text" v-model="user.email" class="form-control" id="inputAddress" placeholder="Email" value=""> 
+                        <input type="text" v-model="user.email" class="form-control" id="inputAddress" placeholder="Email" value="">
                     </div>
 
                     <div class="form-group" style="max-width: 30%">
                         <input type="password" class="form-control" v-model="user.password" id="inputPassword4" placeholder="Password" value="">
-                    </div>                
+                    </div>
                 </div>
             </div>
             <!-- End Form -->
@@ -101,7 +101,7 @@
                 <button type="submit" class="mb-2 btn btn-primary mr-2">Add user</button>
                 </div>
             </div>
-            <!-- / Button --> 
+            <!-- / Button -->
         </form>
     </div>
 
@@ -130,22 +130,29 @@ export default {
             let component = this;
             this.$store.dispatch('addUser', [component.user,this.$store.state.auth.headers])
             .then((resp) => {
-                this.success = resp.data.msg
-                this.user= {
-                    title:'',
-                    medium:'',
-                    user_type:'',
-                    first_name:'',
-                    last_name:'',
-                    email:'',
-                    phone:'',
-                    password:''
-                }                
-                this.errors = []
+                this.error = ''
+                this.success = ''
+                if(resp.data.error){
+                  this.error = resp.data.msg
+                }else{
+                  this.success = resp.data.msg
+                  this.user= {
+                      title:'',
+                      medium:'',
+                      user_type:'',
+                      first_name:'',
+                      last_name:'',
+                      email:'',
+                      phone:'',
+                      password:''
+                  }
+                  this.errors = []
+                }
+
             })
             .catch(err => {
                 console.log(err)
-                this.error = 'please verify that the data entered are correct.'
+                this.error = err.message
             })
         },
         checkForm: function (e) {
