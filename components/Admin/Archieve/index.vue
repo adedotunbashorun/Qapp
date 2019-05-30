@@ -52,7 +52,7 @@ export default {
     mounted(){
         setTimeout(() => {
             $('#response-table').DataTable({})
-        },2000)
+        },5000)
     },
     components:{
         Adedotun
