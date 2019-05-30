@@ -32,7 +32,7 @@
                         <tr v-for="(response, index) in archieves" :key="index">
                             <td>{{ index + 1}}</td>
                             <td>{{response.from}}</td>
-                            <td>{{response.data.substr(0, 100)}}</td>
+                            <td><a href="#" data-data='"'+response.data+'"' data-toggle="modal" data-target="#getDetails" data-remote="false" class="bs-tooltip" data-original-title="Details">{{response.data.substr(0, 100)}}</a></td>
                             <td><Adedotun :value="response.createdAt" fn="date" /></td>
                         </tr>
                     </tbody>
@@ -42,6 +42,24 @@
             </div>
         </div>
         <!-- End Default Light Table -->
+        <div id="getDetails" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </template>
@@ -53,6 +71,16 @@ export default {
         setTimeout(() => {
             $('#response-table').DataTable({})
         },5000)
+            var getDetails = $("#getDetails")
+
+            // getDetails.on('hidden.bs.modal', function (e) {
+            //     $(e.target).removeData("bs.modal").find(".loadAjax").empty();
+            // });
+
+            getDetails.on("show.bs.modal", function (e) {
+                var link = $(e.relatedTarget);
+                getDetails.find('p').html(link.data("data"))
+            });
     },
     components:{
         Adedotun
