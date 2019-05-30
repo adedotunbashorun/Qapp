@@ -32,7 +32,7 @@
                         <tr v-for="(response, index) in archieves" :key="index">
                             <td>{{ index + 1}}</td>
                             <td>{{response.from}}</td>
-                            <td>{{response.data}}</td>
+                            <td>{{response.data.substr(0, 100)}}</td>
                             <td><Adedotun :value="response.createdAt" fn="date" /></td>
                         </tr>
                     </tbody>
@@ -53,9 +53,6 @@ export default {
         setTimeout(() => {
             $('#response-table').DataTable({})
         },2000)
-        $("#response-table tr td").text(function(index, currentText) {
-            return currentText.substr(0, 100);
-        });
     },
     components:{
         Adedotun
