@@ -1,6 +1,6 @@
 <template>
     <div class="main-content-container container-fluid px-4">
-            
+
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -9,7 +9,7 @@
             </div>
         </div>
         <!-- End Page Header -->
-                    
+
 
         <!-- Default Light Table -->
         <div class="row">
@@ -23,14 +23,14 @@
                     <thead class="bg-light">
                     <tr>
                         <th scope="col" class="border-0">#</th>
-                        <th scope="col" class="border-0">From</th>                                                
+                        <th scope="col" class="border-0">From</th>
                         <th scope="col" class="border-0">Response</th>
                         <th scope="col" class="border-0"></th>
                     </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(response, index) in archieves" :key="index">
-                            <td>{{ index + 1}}</td>  
+                            <td>{{ index + 1}}</td>
                             <td>{{response.from}}</td>
                             <td>{{response.data}}</td>
                             <td><Adedotun :value="response.createdAt" fn="date" /></td>
@@ -53,6 +53,9 @@ export default {
         setTimeout(() => {
             $('#response-table').DataTable({})
         },2000)
+        $("#response-table").text(function(index, currentText) {
+            return currentText.substr(0, 100);
+        });
     },
     components:{
         Adedotun
