@@ -32,7 +32,7 @@
                         <tr v-for="(response, index) in archieves" :key="index">
                             <td>{{ index + 1}}</td>
                             <td>{{response.from}}</td>
-                            <td><a href="#" data-data='"'+response.data+'"' data-toggle="modal" data-target="#getDetails" data-remote="false" class="bs-tooltip" data-original-title="Details">{{response.data.substr(0, 100)}}</a></td>
+                            <td><a href="#" :data-data="response.data" data-toggle="modal" data-target="#getDetails" data-remote="false" class="bs-tooltip" data-original-title="Details">{{response.data.substr(0, 100)}}</a></td>
                             <td><Adedotun :value="response.createdAt" fn="date" /></td>
                         </tr>
                     </tbody>
