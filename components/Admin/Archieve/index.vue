@@ -53,7 +53,7 @@ export default {
         setTimeout(() => {
             $('#response-table').DataTable({})
         },2000)
-        $("#response-table").text(function(index, currentText) {
+        $("#response-table tr td").text(function(index, currentText) {
             return currentText.substr(0, 100);
         });
     },
