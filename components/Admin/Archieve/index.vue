@@ -46,8 +46,8 @@
             <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h4 class="modal-title"><i class="material-icons">detail</i> Details</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Details</h4>
                     </div>
                     <div class="modal-body">
                         <p>
