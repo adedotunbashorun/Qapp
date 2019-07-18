@@ -57,10 +57,10 @@
                                 <nuxt-link class="" :to="{name: 'admin-users-id', params:{id : user._id}}" title="edit / view">
                                 <i class="material-icons">edit</i></nuxt-link>
                                 <!-- <div class="dropdown-divider"></div> -->
-                                <a class="dropdown-item text-success" style="cursor:pointer;" @click="activateUser(user._id)" title="activate" v-if="user.is_active == false">
-                                <i class="fa fa-check" ></i> Activate</a>
-                                <a class="dropdown-item text-danger" style="cursor:pointer;" @click="activateUser(user._id)" title="Deactivate" v-else>
-                                <i class="fa fa-times" ></i> Deactivate</a>
+                                <a class="text-success" style="cursor:pointer;" @click="activateUser(user._id)" title="activate" v-if="user.is_active == false">
+                                <i class="fa fa-check" ></i></a>
+                                <a class="text-danger" style="cursor:pointer;" @click="activateUser(user._id)" title="Deactivate" v-else>
+                                <i class="fa fa-times" ></i></a>
                                 <a v-if="user.user_type !== 'admin'" class="text-danger" style="cursor:pointer;" @click="deleteUser(user._id)" title="delete">
                                 <i class="material-icons text-danger">delete</i></a>
                             <!-- </div>
