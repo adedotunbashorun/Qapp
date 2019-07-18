@@ -112,6 +112,18 @@ const deleteUser = (data, header) => {
     })
 }
 
+const activateUser = (data) => {
+  return new Promise((resolve, reject) => {
+      axios.get(config.apiUrl + '/api/activate/'+ data)
+          .then(resp => {
+              resolve(resp)
+          })
+          .catch(err => {
+              reject(err)
+          })
+  })
+}
+
 export const User = {
     login,
     register,
@@ -121,5 +133,6 @@ export const User = {
     logout,
     allUser,
     userById,
+    activateUser,
     deleteUser
 }

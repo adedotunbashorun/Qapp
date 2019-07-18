@@ -1,6 +1,6 @@
 <template>
     <div class="main-content-container container-fluid px-4">
-            
+
         <!-- Page Header -->
         <div class="page-header row no-gutters py-4">
             <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -17,7 +17,7 @@
             <button type="button" class="mb-2 btn btn-outline-primary mr-2">Create User</button></nuxt-link>
         </div>
         </div>
-        <!-- / Button -->            
+        <!-- / Button -->
 
         <!-- Default Light Table -->
         <div class="row">
@@ -44,10 +44,10 @@
                         <td>{{ index +1 }}</td>
                         <td>{{ user.first_name + ' ' + user.last_name}}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{ user.phone }}</td>                        
+                        <td>{{ user.phone }}</td>
                         <td>{{ user.user_type }}</td>
                         <td style="color: #3ED60E">{{ user.is_scheduled }}</td>
-                        <td> 
+                        <td>
                         <!-- <ul class="navbar-nav border-left flex-row ">
                             <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -57,6 +57,10 @@
                                 <nuxt-link class="" :to="{name: 'admin-users-id', params:{id : user._id}}" title="edit / view">
                                 <i class="material-icons">edit</i></nuxt-link>
                                 <!-- <div class="dropdown-divider"></div> -->
+                                <a class="dropdown-item text-success" style="cursor:pointer;" @click="activateUser(user._id)" title="activate" v-if="user.is_active == false">
+                                <i class="fa fa-check" ></i> Activate</a>
+                                <a class="dropdown-item text-danger" style="cursor:pointer;" @click="activateUser(user._id)" title="Deactivate" v-else>
+                                <i class="fa fa-times" ></i> Deactivate</a>
                                 <a v-if="user.user_type !== 'admin'" class="text-danger" style="cursor:pointer;" @click="deleteUser(user._id)" title="delete">
                                 <i class="material-icons text-danger">delete</i></a>
                             <!-- </div>
@@ -87,6 +91,11 @@ export default {
             this.$store.dispatch('removeUser', [id,this.$store.state.auth.headers])
             .then((resp) => {
             }).catch(err => console.log())
+        },
+        activateUser(id){
+            this.$store.dispatch('activateUser', id)
+            .then((resp) => { alert(resp.data.msg)
+            }).catch(err => alert(err.message))
         }
     }
 }

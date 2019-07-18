@@ -17,7 +17,7 @@ import {
   ALL_USERS,
   ALL_USERS_SUCCESS,
   ALL_USERS_FAILURE,
-  LOGIN, 
+  LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
@@ -36,6 +36,18 @@ export const actions = {
         resolve(response)
       }).catch(err => {
         commit(ALL_USERS_FAILURE, err)
+        reject(err)
+      })
+    })
+  },
+  activateUser({ commit }, data) {
+    // commit(APPROVE_USERS)
+    return new Promise((resolve, reject) => {
+      Api.User.activateUser(data).then( response => {
+        // commit(APPROVE_USERS_SUCCESS,response.data)
+        resolve(response)
+      }).catch(err => {
+        // commit(APPROVE_USERS_FAILURE, err)
         reject(err)
       })
     })
@@ -73,14 +85,14 @@ export const actions = {
         commit(USER_BY_ID_FAILURE, err)
         reject(err)
       })
-    })    
+    })
   },
   addUser ({commit}, [payload,header]) {
     commit(ADD_USER)
     return new Promise((resolve, reject) => {
       Api.User.register(payload,header).then(response => {
         commit(ADD_USER_SUCCESS, response.data)
-        resolve(response)      
+        resolve(response)
       }).catch(err => {
         commit(ADD_USER_FAILURE, err)
         reject(err)
@@ -96,8 +108,8 @@ export const actions = {
       }).catch(err => {
         commit(UPDATE_USER_FAILURE, err)
         reject(err)
-      })  
-    })  
+      })
+    })
   },
   removeUser ({commit}, [payload,header]) {
     commit(REMOVE_USER)
@@ -109,7 +121,7 @@ export const actions = {
       }).catch(err => {
         commit(REMOVE_USER_FAILURE, err)
         reject(err)
-      })  
+      })
     })
   },
   logout({ commit }, header){
@@ -121,7 +133,7 @@ export const actions = {
       }).catch(err => {
         commit(LOGOUT_FAILURE, err)
         reject(err)
-      }) 
+      })
     })
   },
   nuxtServerInit({ commit }, { req }) {
@@ -130,7 +142,7 @@ export const actions = {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {
         token = parsed.jwtToken
-        user = JSON.parse(parsed.user)        
+        user = JSON.parse(parsed.user)
       } catch (err) {
         // No valid cookie found
       }
