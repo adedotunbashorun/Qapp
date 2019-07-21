@@ -65,6 +65,18 @@ const register = (data, header) => {
     })
 }
 
+const resetPassword = (data, header) => {
+  return new Promise((resolve, reject) => {
+      axios.post(config.apiUrl + '/api/reset_password/'+data._id, data, { headers: { Authorization: header } })
+          .then(resp => {
+              resolve(resp)
+          })
+          .catch(err => {
+              reject(err)
+          })
+  })
+}
+
 const update = (data, header) => {
     return new Promise((resolve, reject) => {
         axios.patch(config.apiUrl + '/api/user/update/' + data._id, data, { headers: { Authorization: header } })
@@ -129,6 +141,7 @@ export const User = {
     register,
     update,
     forgetPassword,
+    resetPassword,
     activity,
     logout,
     allUser,

@@ -136,6 +136,30 @@ export const actions = {
       })
     })
   },
+  forgetPassword({ commit }, data){
+    // commit(LOGOUT)
+    return new Promise((resolve, reject) => {
+      Api.User.forgetPassword(data).then(response => {
+        // commit(LOGOUT_SUCCESS, response.data)
+        resolve(response)
+      }).catch(err => {
+        // commit(LOGOUT_FAILURE, err)
+        reject(err)
+      })
+    })
+  },
+  resetPassword({ commit }, [payload,header]){
+    // commit(LOGOUT)
+    return new Promise((resolve, reject) => {
+      Api.User.resetPassword(payload,header).then(response => {
+        commit(USER_BY_ID_SUCCESS, response.data)
+        resolve(response)
+      }).catch(err => {
+        // commit(LOGOUT_FAILURE, err)
+        reject(err)
+      })
+    })
+  },
   nuxtServerInit({ commit }, { req }) {
     let token = '', user = {}
     if (req.headers.cookie) {

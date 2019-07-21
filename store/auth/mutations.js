@@ -72,6 +72,7 @@ export const mutations = {
   },
   [USER_BY_ID_SUCCESS] (state, payload) {
     state.showLoader = false
+    state.user = payload.user
   },
   [USER_BY_ID_FAILURE](state, payload) {
     state.showLoader = false

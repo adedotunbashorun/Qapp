@@ -63,7 +63,7 @@
             <li class="nav-item">
             <nuxt-link class="nav-link " :to="{name: 'admin-archieves'}">
                 <i class="material-icons">list</i>
-                <span><strong>Archieve</strong></span>
+                <span><strong>Archive</strong></span>
             </nuxt-link>
             </li>
             <li class="nav-item">

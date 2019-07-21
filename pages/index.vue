@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto" id="login">
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Sign In</h5>
@@ -11,7 +11,7 @@
                   <li class="text-danger" v-for="error in errors" :key="error">{{ error.message }}</li>
                 </ul>
               </p>
-            <form class="form-signin" @submit.prevent="checkForm">
+            <form class="form-signin"  @submit.prevent="checkForm">
               <div class="form-label-group">
                 <input type="email" id="inputEmail" class="form-control" v-model="user.email" placeholder="Email address" required autofocus>
                 <label for="inputEmail">Email address</label>
@@ -27,9 +27,35 @@
                 <label class="custom-control-label" for="customCheck1">Remember password</label>
               </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              <a href="#" class="txt1" id="show_forgetpassword">
+								Forgot Password?
+							</a>
               <!-- <hr class="my-4">
               <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
               <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto" id="forgetPassword">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Forget Password</h5>
+            <p v-if="errors.length">
+                <b>Please correct the following error(s):</b>
+                <ul>
+                  <li class="text-danger" v-for="error in errors" :key="error">{{ error.message }}</li>
+                </ul>
+              </p>
+            <form class="form-forget" @submit.prevent="forgetPassword">
+              <div class="form-label-group">
+                <input type="email" id="inputEmail1" class="form-control" v-model="login.email" placeholder="Email address" required autofocus>
+                <label for="inputEmail1">Email address</label>
+              </div>
+              <a href="#" class="txt1" id="show_login">
+                <i class="fa fa-arrow-left"></i> Back</h6><br/>
+              </a>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Send Reset Instruction</button>
             </form>
           </div>
         </div>
@@ -41,7 +67,7 @@
 <script>
 
 const Cookie = process.client ? require('js-cookie') : undefined
-export default {  
+export default {
   middleware: 'guest',
   layout: 'site',
   data(){
@@ -56,17 +82,28 @@ export default {
         }
       }
   },
-  methods: {      
+  mounted(){
+    $("#forgetPassword").hide();
+      $('#show_login').on('click', function(){
+        $("#login").show()
+        $("#forgetPassword").hide();
+      })
+      $('#show_forgetpassword').on('click', function(){
+        $("#login").hide()
+        $("#forgetPassword").show();
+      })
+  },
+  methods: {
       loginUser(){
           let component = this;
           this.$store.dispatch('login', component.user)
           .then((resp) => {
               const token = resp.data.token
               const user = resp.data.user
-              this.$store.commit('LOGIN_SUCCESS', {token, user})              
+              this.$store.commit('LOGIN_SUCCESS', {token, user})
               Cookie.set('jwtToken', token)
-              Cookie.set('user', user) 
-              this.$router.go('/admin/dashboard') 
+              Cookie.set('user', user)
+              this.$router.go('/admin/dashboard')
           })
           .catch(err =>  {
             component.errors.push(err)
@@ -99,9 +136,16 @@ export default {
         return re.test(email);
       },
       forgetPassword(){
+          if (!this.validEmail(this.login.email)) {
+            this.errors.push('Valid email required.');
+            return false;
+          }
           let component = this;
           this.$store.dispatch('forgetPassword', component.login)
-          .then((user) => $("#forgetPassword .close").click() )
+          .then((user) =>{
+            $("#login").show()
+            $("#forgetPassword").hide()
+          })
           .catch(err => console.log(err))
       },
   }
