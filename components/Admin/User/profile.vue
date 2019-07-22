@@ -70,7 +70,8 @@
                                 <input type="text" class="form-control" v-model="user_details.last_name" placeholder="Last Name" aria-label="Full name" aria-describedby="basic-addon1"> </div>
                             </div>
                             <div class="form-group" style="max-width: 100%">
-                                <input type="text" v-model="user_details.phone" class="form-control" placeholder="Phone Number" value="">
+                                <input type="text" v-model="user_details.phone" pattern="^\+[1-9]\d{1,14}$" class="form-control" placeholder="Phone Number" value="">
+                                <span class="note">Format: +2349034268873</span>
                             </div>
 
                             <div class="form-group" style="max-width: 100%">

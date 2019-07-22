@@ -11,10 +11,10 @@
 
         <!-- Button -->
         <div class="row">
-        <div class="col">
-            <nuxt-link to="/admin/users">
-            <button type="button" class="mb-2 btn btn-outline-primary mr-2">Go back</button></nuxt-link>
-        </div>
+          <div class="col">
+              <nuxt-link to="/admin/users">
+              <button type="button" class="mb-2 btn btn-outline-primary mr-2">Go back</button></nuxt-link>
+          </div>
         </div>
         <!-- / Button -->
 
@@ -81,7 +81,7 @@
                     </div>
                     <div class="form-group" style="max-width: 30%">
                         <input type="text" v-model="user.phone" pattern="^\+[1-9]\d{1,14}$" class="form-control" placeholder="Phone Number" value="" required>
-                        <span class="note">Format: 2349034268873</span>
+                        <span class="note">Format: +2349034268873</span>
                     </div>
 
                     <div class="form-group" style="max-width: 30%">
