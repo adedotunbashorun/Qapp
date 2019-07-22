@@ -1,12 +1,12 @@
 <template>
-    <CreateUser />
+    <ViewUser />
 </template>
 <script>
-import CreateUser from '~/components/Admin/User/add.vue'
+import ViewUser from '~/components/Admin/User/profile.vue'
 export default {
     layout: 'admin',
     components:{
-        CreateUser
-    }
+        ViewUser
+    },
 }
 </script>

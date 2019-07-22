@@ -49,6 +49,19 @@ export const actions = {
     })
   },
 
+  allUserResponse({ commit }, [payload,header]) {
+    // commit(ALL_SCHEDULES)
+    return new Promise((resolve, reject) => {
+      Api.Response.allUserResponse(payload,header).then(response => {
+        commit(TOTAL, response.data)
+        resolve(response)
+      }).catch(err => {
+        commit(ERROR_MSG, err)
+        reject(err)
+      })
+    })
+  },
+
   allUserSentSchedules({ commit }, [payload,header]) {
     // commit(ALL_SCHEDULES)
     return new Promise((resolve, reject) => {

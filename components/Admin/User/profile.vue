@@ -115,43 +115,96 @@
                 </div>
             </div>
 
-            <div class="col-md-12" v-if="schedules.length > 0">
-                <div class="card card-small mb-4">
-                    <div class="card-header border-bottom">
-                    <h6 class="m-0">Schedule Log</h6>
-                    </div>
-                    <div class="card-body p-0 pb-3 text-center">
-                        <table id="schedule-table" class="table">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">S/N</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col"> Question</th>
-                                    <th scope="col">Has Replied</th>
-                                    <th scope="col">Scheduled Date</th>
-                                    <th scope="col">Status</th>
-                                </tr>
+            <div class="row">
+                <div class="col-md-12" v-if="responses.length > 0">
+                    <div class="card card-small">
+                        <div class="card-header border-bottom">
+                          <h6 class="m-0">User Response</h6>
+                        </div>
+                        <div class="card-body p-0 pb-3 text-center">
+                        <table id="response-table" class="table mb-0" style="margin:20px;">
+                            <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="border-0">#</th>
+                                <th scope="col" class="border-0">Question</th>
+                                <th scope="col" class="border-0">From</th>
+                                <th scope="col" class="border-0">Response</th>
+                                <th scope="col" class="border-0"></th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(schedule,index) in schedules" :key="index">
-                                <th scope="row">
-                                    {{ index+1 }}
-                                </th>
-                                <td>
-                                    {{ schedule.category_id.name }}
-                                </td>
-                                <td>
-                                    {{ schedule.question_id.subject }}
-                                </td>
-                                <td style="color: #3ED60E">{{ schedule.is_reply }}</td>
-                                <td><Adedotun :value="schedule.scheduled_date" fn="date" /></td>
-                                <td>{{ (new Date() > new Date(schedule.scheduled_date)) ? 'sent' : 'not sent'}}</td>
+                                <tr v-for="(response, index) in responses" :key="index">
+                                    <td>{{ index + 1}}</td>
+                                    <td>{{ response.user_id.first_name + ' ' + response.user_id.last_name}}</td>
+                                    <td>{{response.question_id.subject}}</td>
+                                    <td>{{response.from}}</td>
+                                    <td><a href="#" :data-data="response.data" data-toggle="modal" data-target="#getDetails" data-remote="false" class="bs-tooltip" data-original-title="Details">{{response.data.substr(0, 100)}}</a></td>
+                                    <td><Adedotun :value="response.createdAt" fn="date" /></td>
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="col-md-12" v-if="schedules.length > 0">
+                  <div class="card card-small mb-4">
+                      <div class="card-header border-bottom">
+                        <h6 class="m-0">Schedule Log</h6>
+                      </div>
+                      <div class="card-body p-0 pb-3 text-center">
+                          <table id="schedule-table" class="table">
+                              <thead class="thead-dark">
+                                  <tr>
+                                      <th scope="col">S/N</th>
+                                      <th scope="col">Category</th>
+                                      <th scope="col"> Question</th>
+                                      <th scope="col">Has Replied</th>
+                                      <th scope="col">Scheduled Date</th>
+                                      <th scope="col">Status</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr v-for="(schedule,index) in schedules" :key="index">
+                                  <th scope="row">
+                                      {{ index+1 }}
+                                  </th>
+                                  <td>
+                                      {{ schedule.category_id.name }}
+                                  </td>
+                                  <td>
+                                      {{ schedule.question_id.subject }}
+                                  </td>
+                                  <td style="color: #3ED60E">{{ schedule.is_reply }}</td>
+                                  <td><Adedotun :value="schedule.scheduled_date" fn="date" /></td>
+                                  <td>{{ (new Date() > new Date(schedule.scheduled_date)) ? 'sent' : 'not sent'}}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        <!-- End Default Light Table -->
+            <div id="getDetails" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><i class="material-icons">detail</i> Details</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -170,6 +223,7 @@ export default {
             email:'',
             phone:''
         },
+        responses: [],
         activities:[],
         schedules:[],
         success: '',
@@ -183,13 +237,30 @@ export default {
         this.getUser()
         this.activityLogs()
         this.userSchedule()
+        this.allUserResponse()
         setTimeout(() => {
             $('#activity-table').DataTable({})
             $('#schedule-table').DataTable({})
+            $('#response-table').DataTable({})
         },2000)
+        var getDetails = $("#getDetails")
+        // getDetails.on('hidden.bs.modal', function (e) {
+        //     $(e.target).removeData("bs.modal").find(".loadAjax").empty();
+        // });
+
+        getDetails.on("show.bs.modal", function (e) {
+            var link = $(e.relatedTarget);
+            getDetails.find('p').html(link.data("data"))
+        });
 
   },
   methods: {
+    allUserResponse(){
+        this.$store.dispatch('allUserResponse',[this.$nuxt._route.params.id, this.$store.state.auth.headers])
+        .then((resp) => {
+            this.responses = resp.data.responses
+        }).catch(err => console.log())
+    },
     getUser(){
         this.$store.dispatch('userById', [this.$nuxt._route.params.id,this.$store.state.auth.headers])
         .then((resp) => {

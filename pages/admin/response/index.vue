@@ -15,10 +15,10 @@ export default {
         }
     },
     mounted(){
-        this.allSchedules()
+        this.allResponses()
     },
     methods:{
-        allSchedules(){
+        allResponses(){
             this.$store.dispatch('allResponse', this.$store.state.auth.headers)
             .then((resp) => {
                 this.responses = resp.data.responses

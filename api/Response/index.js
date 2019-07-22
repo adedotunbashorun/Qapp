@@ -13,6 +13,18 @@ const allResponse = (header) => {
     })
 }
 
+const allUserResponse = (data,header) => {
+  return new Promise((resolve, reject) => {
+      axios.get(config.apiUrl + '/api/responses/'+data, { headers: { Authorization: header } })
+          .then(resp => {
+              resolve(resp)
+          })
+          .catch(err => {
+              reject(err)
+          })
+  })
+}
+
 const allArchieve = (header) => {
     return new Promise((resolve, reject) => {
         axios.get(config.apiUrl + '/api/archieves', { headers: { Authorization: header } })
@@ -42,5 +54,6 @@ const allCount = (header) => {
 export const Response = {
     allResponse,
     allArchieve,
+    allUserResponse,
     allCount
 }
