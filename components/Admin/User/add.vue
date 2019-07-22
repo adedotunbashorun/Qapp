@@ -13,7 +13,8 @@
         <div class="row">
           <div class="col">
               <nuxt-link to="/admin/users">
-              <button type="button" class="mb-2 btn btn-outline-primary mr-2">Go back</button></nuxt-link>
+                <button type="button" class="mb-2 btn btn-outline-primary mr-2">Go back</button>
+              </nuxt-link>
           </div>
         </div>
         <!-- / Button -->
