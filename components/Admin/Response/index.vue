@@ -39,7 +39,7 @@
                             <td>{{response.from}}</td>
                             <td><a href="#" :data-data="response.data" data-toggle="modal" data-target="#getDetails" data-remote="false" class="bs-tooltip" data-original-title="Details">{{response.data.substr(0, 100)}}</a></td>
                             <td><Adedotun :value="response.createdAt" fn="date_" /></td>
-                            <td><a href="#" :data-id="response.user_id._id" :data-name=" response.user_id.first_name + ' ' + response.user_id.last_name" data-toggle="modal" data-target="#replyResponse" data-remote="false" class="bs-tooltip" data-original-title="Reply">reply</a></td>
+                            <td><a href="#" :data-id="response.user_id._id" :data-name="response.user_id.first_name + ' ' + response.user_id.last_name" data-toggle="modal" data-target="#replyResponse" data-remote="false" class="bs-tooltip" data-original-title="Reply">reply</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -137,8 +137,8 @@ export default {
 
         getReply.on("show.bs.modal", function (e) {
             var link = $(e.relatedTarget);
-            getReply.find('#reply #user_id').html(link.data("id"))
-            getReply.find('#reply #name').html(link.data("name"))
+            getReply.find('#reply #user_id').val(link.data("id"))
+            getReply.find('#reply #name').val(link.data("name"))
         });
     },
     methods:{
