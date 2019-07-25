@@ -31,7 +31,7 @@ import moment from 'moment'
     date_: function(value, format) {
         if (value) {
             // return moment.utc(value).local().fromNow();
-            return moment(String(value)).format(format || 'Do MMM YYYY')
+            return moment(String(value)).format(format || 'Do MMM YYYY h:mm A')
         }
     },
 

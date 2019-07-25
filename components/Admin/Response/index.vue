@@ -27,7 +27,8 @@
                         <th scope="col" class="border-0">Question</th>
                         <th scope="col" class="border-0">From</th>
                         <th scope="col" class="border-0">Response</th>
-                        <th scope="col" class="border-0"></th>
+                        <th scope="col" class="border-0">Replied Time</th>
+                        <th scope="col" class="border-0">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,7 +38,8 @@
                             <td>{{response.question_id.subject}}</td>
                             <td>{{response.from}}</td>
                             <td><a href="#" :data-data="response.data" data-toggle="modal" data-target="#getDetails" data-remote="false" class="bs-tooltip" data-original-title="Details">{{response.data.substr(0, 100)}}</a></td>
-                            <td><Adedotun :value="response.createdAt" fn="date" /></td>
+                            <td><Adedotun :value="response.createdAt" fn="date_" /></td>
+                            <td><a href="#" :data-id="response.user_id._id" :data-name=" response.user_id.first_name + ' ' + response.user_id.last_name" data-toggle="modal" data-target="#replyResponse" data-remote="false" class="bs-tooltip" data-original-title="Reply">reply</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -64,26 +66,85 @@
                 </div>
             </div>
         </div>
+        <div id="replyResponse" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><i class="material-icons">detail</i> Reply</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12" id="reply">
+                          <input type="hidden" class="form-control" v-model="reply.user_id" id="user_id" placeholder="Name" aria-label="name" aria-describedby="basic-addon1">
+                          <div class="form-group" style="max-width: 100%">
+                            <div class="input-group mb-3">
+                            <div class="input-group-prepend"></div>
+                              <input type="text" class="form-control" id="name" placeholder="Name" aria-label="name" aria-describedby="basic-addon1">
+                            </div>
+                          </div>
+                          <div class="form-group" style="max-width: 100%">
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend"></div>
+                              <select class="form-control" v-model="reply.medium">
+                                  <option value="">-- Information Medium --</option>
+                                  <option value="Email">Email</option>
+                                  <option value="Sms">Sms</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group" style="max-width: 100%">
+                            <div class="input-group mb-3">
+                            <div class="input-group-prepend"></div>
+                              <textarea type="text" class="form-control" v-model="reply.message" placeholder="message" rows="4"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" @click="sendMessage">Send</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
 import Adedotun from '../../Extra/adedotun'
 export default {
     props:['responses'],
+    data(){
+        return {
+          reply:{
+            user_id: '',
+            medium: '',
+            message: '',
+          }
+        }
+    },
     mounted(){
         setTimeout(() => {
             $('#response-table').DataTable({})
         },2000)
         var getDetails = $("#getDetails")
 
-        // getDetails.on('hidden.bs.modal', function (e) {
-        //     $(e.target).removeData("bs.modal").find(".loadAjax").empty();
-        // });
-
         getDetails.on("show.bs.modal", function (e) {
             var link = $(e.relatedTarget);
             getDetails.find('p').html(link.data("data"))
         });
+
+        var getReply = $("#replyResponse")
+
+        getReply.on("show.bs.modal", function (e) {
+            var link = $(e.relatedTarget);
+            getReply.find('#reply #user_id').html(link.data("id"))
+            getReply.find('#reply #name').html(link.data("name"))
+        });
+    },
+    methods:{
+      sendMessage(){
+        alert('not Implemented')
+      }
     },
     components:{
         Adedotun
