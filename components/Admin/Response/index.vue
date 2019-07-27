@@ -75,13 +75,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="col-md-12" id="reply">
-                          <div class="form-group" style="max-width: 100%">
-                            <div class="input-group mb-3">
-                            <div class="input-group-prepend"></div>
-                              <input type="text" class="form-control" v-model="reply.user_id" id="user_id" disabled>
-                            </div>
-                          </div>
-
+                          <input type="hidden" class="form-control" id="user_id" disabled>
                           <div class="form-group" style="max-width: 100%">
                             <div class="input-group mb-3">
                             <div class="input-group-prepend"></div>
@@ -152,7 +146,7 @@ export default {
     },
     methods:{
       sendMessage(){
-        // this.reply.user_id = this.id
+        this.reply.user_id = $("#reply #user_id").val()
         this.$store.dispatch('responseReply', [this.reply,this.$store.state.auth.headers])
         .then((resp) => {
             this.error = ''
