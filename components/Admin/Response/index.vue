@@ -143,7 +143,26 @@ export default {
     },
     methods:{
       sendMessage(){
-        alert('not Implemented')
+        this.$store.dispatch('responseReply', [this.reply,this.$store.state.auth.headers])
+        .then((resp) => {
+            this.error = ''
+            this.success = ''
+            if(resp.data.error){
+              this.error = resp.data.msg
+            }else{
+              this.success = resp.data.msg
+              this.reply = {
+                user_id: '',
+                medium: '',
+                message: ''
+              }
+              this.errors = []
+            }
+
+        })
+        .catch(err => {
+            this.error = err.message
+        })
       }
     },
     components:{

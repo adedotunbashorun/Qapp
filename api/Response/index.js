@@ -37,6 +37,18 @@ const allArchieve = (header) => {
     })
 }
 
+const replyResonse = (data, header) => {
+  return new Promise((resolve, reject) => {
+      axios.post(config.apiUrl + '/api/reply_response', data, { headers: { Authorization: header } })
+          .then(resp => {
+              resolve(resp)
+          })
+          .catch(err => {
+              reject(err)
+          })
+  })
+}
+
 const allCount = (header) => {
   return new Promise((resolve, reject) => {
       axios.get(config.apiUrl + '/api/all/count', { headers: { Authorization: header } })
@@ -55,5 +67,6 @@ export const Response = {
     allResponse,
     allArchieve,
     allUserResponse,
-    allCount
+    allCount,
+    replyResonse
 }
