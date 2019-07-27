@@ -138,7 +138,7 @@ export default {
 
         getReply.on("show.bs.modal", function (e) {
             var link = $(e.relatedTarget)
-            this.reply.user_id = link.data("id")
+            // this.reply.user_id = link.data("id")
             this.id = link.data("id")
             getReply.find('#reply #user_id').val(link.data("id"))
             getReply.find('#reply #name').val(link.data("name"))

@@ -21,11 +21,11 @@
                         <div>
                           <div class="form-label-group">
                             <label for="inputPassword">Old Password</label>
-                            <input type="password" id="inputPassword" class="form-control" v-model="reset.old_password" placeholder="Password" required>
+                            <input type="password" class="form-control" v-model="reset.old_password" placeholder="Password" required>
                           </div>
                           <div class="form-label-group">
                             <label for="inputPassword">New Password</label>
-                            <input type="password" id="inputPassword" class="form-control" v-model="reset.password" placeholder="Password" required>
+                            <input type="password" class="form-control" v-model="reset.password" placeholder="Password" required>
                           </div>
                         </div>
                     </div>
