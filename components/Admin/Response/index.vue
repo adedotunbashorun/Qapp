@@ -79,7 +79,7 @@
                           <div class="form-group" style="max-width: 100%">
                             <div class="input-group mb-3">
                             <div class="input-group-prepend"></div>
-                              <input type="text" class="form-control" id="name" placeholder="Name" aria-label="name" aria-describedby="basic-addon1">
+                              <input type="text" class="form-control" id="name" placeholder="Name" aria-label="name" aria-describedby="basic-addon1" readonly>
                             </div>
                           </div>
                           <div class="form-group" style="max-width: 100%">
@@ -152,9 +152,9 @@ export default {
             this.error = ''
             this.success = ''
             if(resp.data.error){
-              this.error = resp.data.msg
+              alert(resp.data.msg)
             }else{
-              this.success = resp.data.msg
+              alert(resp.data.msg)
               this.reply = {
                 user_id: '',
                 medium: '',
