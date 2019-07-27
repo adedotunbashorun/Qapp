@@ -75,7 +75,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="col-md-12" id="reply">
-                          <input type="hidden" class="form-control" v-model="reply.user_id" id="user_id" placeholder="Name" aria-label="name" aria-describedby="basic-addon1">
+                          <input type="text" class="form-control" v-model="reply.user_id" id="user_id" readonly>
                           <div class="form-group" style="max-width: 100%">
                             <div class="input-group mb-3">
                             <div class="input-group-prepend"></div>
