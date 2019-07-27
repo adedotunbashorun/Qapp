@@ -120,7 +120,7 @@ export default {
             medium: '',
             message: '',
           },
-          id
+          id: ''
         }
     },
     mounted(){
