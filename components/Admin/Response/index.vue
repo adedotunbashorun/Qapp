@@ -75,7 +75,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="col-md-12" id="reply">
-                          <input type="hidden" class="form-control" v-model="reply.user_id" id="user_id" disabled>
+                          <div class="form-group" style="max-width: 100%">
+                            <div class="input-group mb-3">
+                            <div class="input-group-prepend"></div>
+                              <input type="text" class="form-control" v-model="reply.user_id" id="user_id" disabled>
+                            </div>
+                          </div>
+
                           <div class="form-group" style="max-width: 100%">
                             <div class="input-group mb-3">
                             <div class="input-group-prepend"></div>
@@ -139,14 +145,14 @@ export default {
         getReply.on("show.bs.modal", function (e) {
             var link = $(e.relatedTarget)
             // this.reply.user_id = link.data("id")
-            this.id = link.data("id")
+            // this.id = link.data("id")
             getReply.find('#reply #user_id').val(link.data("id"))
             getReply.find('#reply #name').val(link.data("name"))
         });
     },
     methods:{
       sendMessage(){
-        this.reply.user_id = this.id
+        // this.reply.user_id = this.id
         this.$store.dispatch('responseReply', [this.reply,this.$store.state.auth.headers])
         .then((resp) => {
             this.error = ''
