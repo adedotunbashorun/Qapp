@@ -65,14 +65,14 @@ export default {
             ],
             script: [
                 { src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js' },
-                { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' },
+                { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'},
                 { src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'},
-                // { src: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js' },
+                { src: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js' },
                 { src: 'https://unpkg.com/shards-ui@latest/dist/js/shards.min.js' },
                 { src: 'https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js' },
                 { src: '/scripts/extras.1.1.0.min.js' },
                 { src: '/scripts/shards-dashboards.1.1.0.min.js' },
-                // { src: '/scripts/app/app-blog-overview.1.1.0.js' },
+                { src: '/scripts/app/app-blog-overview.1.1.0.js' },
                 { src: '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'},
                 { src: '/scripts/toastr/toastr.init.js' },
                 { src: '/scripts/toastr/toastr.min.js' }
@@ -114,7 +114,7 @@ export default {
                   this.error = resp.data.msg
                 }else{
                   this.success = resp.data.msg
-                  this.reset= {
+                  this.reset = {
                       password:'',
                       old_password:''
                   }
